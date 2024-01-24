@@ -1,4 +1,4 @@
-# front-end
+# 基于VUE3开发的视频平台前端
 
 ## Project setup
 ```
