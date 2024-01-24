@@ -1,13 +1,13 @@
 <template>
   <div class="navigator">
     <ul class="items">
-      <div @click="push('/Home')">
+      <div @click="push('/home')">
         <span>首页</span>
       </div>
-      <div @click="push('/Recommend')"><span>推荐</span></div>
-      <div @click="push('/Follow')"><span>关注</span></div>
-      <div @click="push('/Friend')"><span>朋友</span></div>
-      <div><span>我的</span></div>
+      <div @click="push('/recommend')"><span>推荐</span></div>
+      <div @click="push('/follow')"><span>关注</span></div>
+      <div @click="push('/friend')"><span>朋友</span></div>
+      <div @click="push('/user')"><span>我的</span></div>
       <br />
       <div><span>直播</span></div>
       <div><span>放映厅</span></div>

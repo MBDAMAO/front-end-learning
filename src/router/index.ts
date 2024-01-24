@@ -1,8 +1,6 @@
 // history模式
 import { createRouter, createWebHashHistory } from "vue-router";
 
-import Home from "../pages/Home.vue";
-
 const routes = [
   // 路由的默认路径
   {
@@ -11,7 +9,11 @@ const routes = [
   },
   {
     path: "/home",
-    component: Home,
+    component: () => import("../pages/Home.vue"),
+  },
+  {
+    path: "/recommend",
+    component: () => import("../pages/Recommend.vue"),
   },
 ];
 
