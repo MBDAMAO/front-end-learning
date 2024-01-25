@@ -11,18 +11,53 @@
       <span>通知</span>
       <span>私信</span>
       <span>投稿</span>
-      <button class="login" @click="login">登录</button>
+      <button class="login" @click="loginTableDisplay = true">登录</button>
+    </div>
+  </div>
+  <div class="loginTable" v-if="loginTableDisplay">
+    <div class="block">
+      <input v-model="username" />
+      <input v-model="password" />
+      <button @click="loginF()"></button>
+      <button @click="loginTableDisplay = false"></button>
     </div>
   </div>
 </template>
 
 <script setup name="Header">
-function login() {
-  console.log("开始登录");
+import { ref } from "vue";
+import { login } from "@/apis/user";
+const loginTableDisplay = ref(false);
+var password = ref("");
+var username = ref("");
+async function loginF() {
+  let data = await login({
+    username: username.value,
+    password: password.value,
+  });
+  console.log(data);
+  localStorage.setItem("token", data.data.token);
 }
 </script>
 
-<style>
+<style scoped>
+.loginTable {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+  z-index: 114;
+  .block {
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    width: 360px;
+    background-color: aliceblue;
+  }
+}
 .login {
   cursor: pointer;
   border-radius: 10px;

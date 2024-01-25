@@ -1,7 +1,7 @@
 import axios from "axios";
 import Message from "element-plus";
 axios.defaults.timeout = 10000; // 超时时间
-axios.defaults.baseURL = "http://127.0.0.1:8088";
+axios.defaults.baseURL = "http://127.0.0.1:8080";
 // 数据格式转换
 axios.defaults.transformRequest = function (data) {
   data = JSON.stringify(data);
@@ -21,7 +21,8 @@ axios.interceptors.request.use(
 // 路由响应拦截
 axios.interceptors.response.use(
   (response) => {
-    if (response.data.success === false) {
+    if (response.data.code === 0) {
+      alert(response.data.msg);
       //   return Message.error(re);
     } else {
       return response.data;
