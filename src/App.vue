@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Header from "@/views/Header/Index.vue";
 import Body from "@/views/Body/index.vue";
 </script>

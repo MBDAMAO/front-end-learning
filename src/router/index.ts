@@ -13,6 +13,10 @@ const routes: Array<RouteRecordRaw> = [
     path: "/recommend",
     component: () => import("../pages/Recommend.vue"),
   },
+  {
+    path: "/test",
+    component: () => import("../components/VideoWindow/Test.vue"),
+  },
 ];
 
 const router = createRouter({

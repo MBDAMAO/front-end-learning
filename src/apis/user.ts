@@ -1,5 +1,9 @@
 import request from "@/utils/request";
-export function login(data: any) {
+interface loginDTO {
+  username: string;
+  password: string;
+}
+export function login(data: loginDTO) {
   return request({
     url: "/user/login",
     method: "post",

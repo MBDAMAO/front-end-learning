@@ -1,6 +1,5 @@
 <template>
-  <div class="vbox">
-    <div class="sidebar"></div>
+  <div class="window">
     <div class="play-hidden" @click="change()" id="play-hidden" display="none">
       <svg
         t="1705315469945"
@@ -31,7 +30,9 @@
       autoplay="true"
       @timeupdate="gettime()"
     >
-      <source src="../../public/1349528558-1-192.mp4" />
+      <source
+        src="https://cn-hljheb-ct-01-07.bilivideo.com/upgcxcode/59/64/1413106459/1413106459-1-192.mp4?e=ig8euxZM2rNcNbRz7wdVhwdlhWhMhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1706268615&gen=playurlv2&os=bcache&oi=2030413803&trid=000070af2d146c1b411eb9718744462d1dffT&mid=35056091&platform=html5&upsig=19512d38cab3d1c77a0a9948fd07c483&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&cdnid=3848&bvc=vod&nettype=0&bw=134835&orderid=0,1&buvid=&build=0&mobi_app=&f=T_0_0&logo=80000000"
+      />
     </video>
     <div class="controller">
       <div class="playButton"></div>
@@ -39,8 +40,7 @@
     </div>
   </div>
 </template>
-
-<script setup name="Recommend" lang="ts">
+<script setup lang="ts">
 import { ref } from "vue";
 import { onMounted } from "vue";
 var video = null;
@@ -93,7 +93,6 @@ function get() {
   canvas.style.filter = "blur(50px)"; // 调整此处的模糊程度
 }
 </script>
-
 <style scoped>
 .sidebar {
   z-index: 11;
@@ -149,7 +148,7 @@ function get() {
 .controller:hover {
   cursor: pointer;
 }
-.vbox {
+.window {
   height: 100%;
   width: 100%;
   display: flex;
