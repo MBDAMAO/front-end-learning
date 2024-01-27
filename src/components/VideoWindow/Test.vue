@@ -5,7 +5,7 @@
     </div>
     <div class="videoBlock">
       <video class="videoEntity" controls ref="rv" @click="draw()">
-        <source src="../../../public/1349528558-1-192.mp4" />
+        <source src="../../../public/2.mp4" />
       </video>
       <div class="controller"></div>
     </div>

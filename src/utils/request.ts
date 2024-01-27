@@ -36,13 +36,19 @@ axios.interceptors.response.use(
     }
   },
   (error) => {
-    switch (error.response.status) {
-      case 400:
-        error.message = `错误请求`;
-        break;
-      case 401:
-        error.message = `未授权，请重新登录`;
-        break;
+    if (error.response) {
+      switch (error.response.status) {
+        case 400:
+          error.message = `错误请求`;
+          break;
+        case 401:
+          error.message = `未授权，请重新登录`;
+          break;
+      }
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log(error.message);
     }
     return Promise.reject(error.response); // 返回接口返回的错误信息
   }
