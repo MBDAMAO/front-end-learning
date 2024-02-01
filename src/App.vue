@@ -15,4 +15,12 @@ import Body from "@/views/Body/index.vue";
   height: 100%;
   display: flex;
 }
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: hidden;
+}
 </style>

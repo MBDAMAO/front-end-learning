@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ElMessage } from "element-plus";
 axios.defaults.timeout = 10000; // 超时时间
 axios.defaults.baseURL = "http://127.0.0.1:8080";
 // 数据格式转换
@@ -50,6 +51,11 @@ axios.interceptors.response.use(
     } else {
       console.log(error.message);
     }
+    ElMessage({
+      showClose: true,
+      message: "Oops, this is a error message.",
+      type: "error",
+    });
     return Promise.reject(error.response); // 返回接口返回的错误信息
   }
 );

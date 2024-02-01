@@ -85,6 +85,7 @@ async function loginF() {
   justify-content: center;
   z-index: 114;
   .inner {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
