@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containermain">
     <Header></Header>
     <Body></Body>
   </div>
@@ -11,7 +11,7 @@ import Body from "@/views/Body/index.vue";
 </script>
 
 <style>
-.container {
+.containermain {
   height: 100%;
   display: flex;
 }

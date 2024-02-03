@@ -7,13 +7,13 @@
       <div class="option" v-on:click="open(3)">相关推荐</div>
     </div>
     <div class="cutline"></div>
-    <div class="works" v-show="status == 1">
+    <div class="content" v-show="status == 1">
       <Works></Works>
     </div>
-    <div class="comments" v-show="status == 2">
+    <div class="content" v-show="status == 2">
       <Comments></Comments>
     </div>
-    <div class="recommend" v-show="status == 3">
+    <div class="content" v-show="status == 3">
       <Recommends></Recommends>
     </div>
   </div>
@@ -63,5 +63,9 @@ function open(params: number) {
   width: 100%;
   background-color: rgb(120, 120, 120);
   opacity: 0.2;
+}
+.content{
+  height: 100%;
+  width: 100%;
 }
 </style>

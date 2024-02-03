@@ -1,16 +1,16 @@
 <template>
-  <div class="body">
+  <div class="bodys">
     <Navigatior></Navigatior>
     <router-view></router-view>
   </div>
 </template>
 
-<script setup name="Body">
+<script setup name="Body" lang="ts">
 import Navigatior from "./Navigator.vue";
 </script>
 
 <style scoped>
-.body {
+.bodys {
   display: flex;
   padding-top: 68px;
   width: 100%;

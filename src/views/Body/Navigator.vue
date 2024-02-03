@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup name="Navigator">
+<script setup name="Navigator" lang="ts">
 import router from "@/router/index.ts";
 function push(path) {
   router.push(path);
