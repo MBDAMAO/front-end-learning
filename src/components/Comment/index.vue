@@ -13,12 +13,32 @@
       <div class="time">
         {{ props.pubtime }}
       </div>
-      <div class="options">回复 分享 点赞{{ props.likes }} 点踩</div>
+      <div class="options">
+        <div class="opItem">
+          <Comment class="opIcon"></Comment>
+          <div class="genshin">回复</div>
+        </div>
+        <div class="opItem">
+          <Share class="opIcon"></Share>
+          <div class="genshin">分享</div>
+        </div>
+        <div class="opItem">
+          <Like class="opIcon"></Like>
+          <div class="genshin">{{ props.likes }}</div>
+        </div>
+        <div class="opItem">
+          <HeartBreak class="opIcon"></HeartBreak>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
+import Like from "@/svgs/SvgLike.vue";
+import Comment from "@/svgs/Comment.vue";
+import Share from "@/svgs/SvgShare.vue";
+import HeartBreak from "@/svgs/SvgHeartBreak.vue";
 const props = defineProps({
   id: String,
   content: String,
@@ -29,6 +49,27 @@ const props = defineProps({
 });
 </script>
 <style scoped>
+.genshin {
+  display: flex;
+  align-items: center;
+}
+.opIcon {
+  margin-right: 3px;
+  fill: rgb(169, 169, 169);
+}
+.opItem {
+  color: rgb(169, 169, 169);
+  display: flex;
+  margin-right: 10px;
+  height: 100%;
+}
+.opItem:hover {
+  cursor: pointer;
+  color: white;
+  .opIcon {
+    fill: white;
+  }
+}
 .container {
   position: relative;
   display: flex;
@@ -38,8 +79,8 @@ const props = defineProps({
   margin-bottom: 10px;
 }
 .img {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
 }
 .headSide {
@@ -76,6 +117,7 @@ const props = defineProps({
 }
 .options {
   display: flex;
+  height: 20px;
   margin-top: 15px;
   color: white;
 }

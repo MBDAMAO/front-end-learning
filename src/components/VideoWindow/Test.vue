@@ -4,6 +4,22 @@
       <canvas id="canvas"></canvas>
     </div>
     <div class="vbox">
+      <div class="expand" @click="showSide()" v-show="!showside">
+        <svg
+          t="1707052181872"
+          class="icon"
+          viewBox="0 0 1028 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="20169"
+          fill="rgba(169, 169, 169, 0.8)"
+        >
+          <path
+            d="M495.212 189.092a8 8 0 0 0-11.312 0l-295.492 295.492-0.08 0.08-45.256 45.252a8 8 0 0 0 0 11.316l45.256 45.256 0.06 0.06 295.512 295.508a8 8 0 0 0 11.312 0l45.256-45.252a8 8 0 0 0 0-11.316l-289.912-289.912 289.912-289.916a8 8 0 0 0 0-11.312l-45.256-45.256z m387.688 636.396a8 8 0 0 1 0 11.316l-45.256 45.252a8 8 0 0 1-11.312 0l-295.512-295.508-0.06-0.06-45.256-45.256a7.996 7.996 0 0 1 0-11.316l45.256-45.252 0.08-0.08 295.492-295.492a8 8 0 0 1 11.312 0l45.256 45.256a8 8 0 0 1 0 11.312l-289.916 289.916 289.916 289.912z"
+            p-id="20170"
+          ></path>
+        </svg>
+      </div>
       <div class="topPlay" @click="change()" v-show="!playing">
         <svg
           t="1705315469945"
@@ -52,7 +68,7 @@
             ></path>
           </svg>
         </div>
-        <div class="like">
+        <div class="like" v-on:click="like()">
           <svg
             t="1706800852085"
             class="icon1"
@@ -60,16 +76,17 @@
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="5248"
+            ref="likeButton"
+            :fill="likecolor"
           >
             <path
               d="M535.9 216.7l-22.9 23-22.9-23.1c-89.2-89.7-234.3-90.1-323.9-0.8l-0.8 0.8c-89.7 90.1-89.7 235.8 0 326L476 859.3c20.1 20.4 52.9 20.7 73.4 0.7l0.7-0.7 310.7-316.7c89.7-90.1 89.7-235.8 0-326-89.2-89.7-234.3-90.1-323.9-0.9l-1 1z"
               p-id="5249"
-              fill="#ffffff"
             ></path>
           </svg>
           <div class="numinfo">114</div>
         </div>
-        <div class="comment" v-on:click="showSide()">
+        <div class="comment" v-on:click="openComment()">
           <svg
             t="1706801099641"
             class="icon1"
@@ -86,7 +103,7 @@
           </svg>
           <div class="numinfo">10万</div>
         </div>
-        <div class="save">
+        <div class="save" v-on:click="save()">
           <svg
             t="1706801145907"
             class="icon1"
@@ -94,10 +111,10 @@
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="17536"
+            :fill="savecolor"
           >
             <path
               d="M753.5 943.2c-9.7 0-21.1-3.2-30.8-8.1l-210.4-105-212 105.1c-21.1 11.2-48.5 9.7-68-4.9-19.3-14.6-30.8-40.4-25.8-64.6l43.7-226.5L83.7 483.7C66 466 59.5 438.3 66 415.7c8.1-24.3 27.4-42 53.4-45.4l231.2-42L454.1 118c11.2-22.6 33.9-37.2 58.1-37.2 24.3 0 48.5 14.6 58.1 37.2l103.5 210.3L905 368.7c24.3 3.2 45.4 21.1 51.9 45.4 8.1 24.3 1.5 50.1-16.2 68l-166.5 157 42 226.5c4.9 25.8-6.5 50.1-25.8 64.6-9.6 8.1-22.4 13-36.9 13z"
-              fill="#ffffff"
               p-id="17537"
             ></path>
           </svg>
@@ -120,7 +137,7 @@
           </svg>
           <div class="numinfo">114万</div>
         </div>
-        <div class="more">
+        <div class="more" v-on:click="openMoreSide()">
           <svg
             t="1706801332358"
             class="icon1"
@@ -219,7 +236,11 @@
       </div>
     </div>
     <div class="sideInfo" v-show="showside">
-      <VideoSide></VideoSide>
+      <VideoSide
+        @close-event="showSide()"
+        @changeStatus="(p:number) => changeStatus(p)"
+        :status="sideStatus"
+      ></VideoSide>
     </div>
   </div>
 </template>
@@ -227,14 +248,21 @@
 import { ref, defineProps } from "vue";
 import { onMounted } from "vue";
 import VideoSide from "@/views/videoSide/index.vue";
+var sideStatus = ref(2);
 var showside = ref(false);
+var likeStatus = false;
+var likecolor = ref("white");
 var video = null;
+var likeButton = ref();
 var playing = ref(true);
 var timenow = ref("00:00");
 var duration = ref("00:00");
 var rv = ref();
 var progressNow = ref();
 var videoDuration = ref(0);
+function changeStatus(p: number) {
+  sideStatus.value = p;
+}
 function change() {
   draw();
   playing.value = playing.value == false;
@@ -289,6 +317,46 @@ function draw() {
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   canvas.style.scale = 1.6;
   canvas.style.filter = "blur(30px)";
+}
+async function like() {
+  if (likeStatus) {
+    likeStatus = false;
+    likecolor.value = "white";
+  } else {
+    likeStatus = true;
+    likecolor.value = "rgb(254,44,85)";
+  }
+}
+var saveStatus = false;
+var savecolor = ref("white");
+function openMoreSide() {
+  if (!showside.value) {
+    sideStatus.value = 3;
+    showside.value = true;
+  } else if (sideStatus.value != 3) {
+    sideStatus.value = 3;
+  } else {
+    showside.value = false;
+  }
+}
+function openComment() {
+  if (!showside.value) {
+    sideStatus.value = 2;
+    showside.value = true;
+  } else if (sideStatus.value != 2) {
+    sideStatus.value = 2;
+  } else {
+    showside.value = false;
+  }
+}
+async function save() {
+  if (saveStatus) {
+    saveStatus = false;
+    savecolor.value = "white";
+  } else {
+    saveStatus = true;
+    savecolor.value = "rgb(255,184,2)";
+  }
 }
 defineProps([""]);
 </script>
@@ -369,6 +437,22 @@ defineProps([""]);
     }
   }
 }
+.expand {
+  overflow: hidden;
+  position: absolute;
+  right: -15px;
+  top: 45%;
+  width: 50px;
+  /* background-color: antiquewhite; */
+  height: 50px;
+  bottom: 45%;
+  z-index: 114514;
+}
+.expand:hover {
+  fill: rgba(255, 255, 255, 1);
+  margin-right: 10px;
+  transition: 300ms;
+}
 .topPlay {
   position: absolute;
   display: flex;
@@ -425,6 +509,7 @@ defineProps([""]);
   border-radius: 20px;
 }
 .vbox {
+  overflow: hidden;
   position: relative;
   height: 100%;
   width: 100%;

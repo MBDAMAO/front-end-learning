@@ -27,6 +27,7 @@ onMounted(() => {
 
 <style scoped>
 .coverImage {
+  object-fit: cover;
   height: 100%;
   width: 100%;
 }

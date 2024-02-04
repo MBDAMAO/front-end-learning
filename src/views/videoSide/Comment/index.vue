@@ -7,10 +7,10 @@
           :content="item.content"
           :username="item.username"
           :pubtime="item.pubtime"
+          :likes="item.likes"
         ></Comment>
-        <!-- <Comment v-for="list"></Comment> -->
       </div>
-      <div class="loading" v-show="isloading">加载新内容中</div>
+      <Loading v-show="isloading"></Loading>
     </div>
     <div class="comment-foot">
       <input class="commentInput" placeholder="留下你精彩的评论吧" />
@@ -18,76 +18,87 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
+import Loading from "@/components/Loadings/loading1.vue";
 import Comment from "@/components/Comment/index.vue";
 var isloading = ref(false);
 var contentbox = ref();
-var list = [
+var list: comment[] = [
   {
-    id: 1,
+    id: "1",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
     username: "@dingzhen",
+    likes: "12",
+    headurl: "123",
   },
   {
-    id: 2,
-    content: "cma你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
+    id: "1",
+    content:
+      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
     username: "@dingzhen",
+    likes: "12",
+    headurl: "123",
   },
   {
-    id: 3,
-    content: "cma你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
+    id: "1",
+    content:
+      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
     username: "@dingzhen",
+    likes: "12",
+    headurl: "123",
   },
   {
-    id: 4,
-    content: "c你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你ma",
+    id: "1",
+    content:
+      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
     username: "@dingzhen",
+    likes: "12",
+    headurl: "123",
   },
   {
-    id: 5,
-    content: "cm你哈都i塞尼你你哈都i塞尼你a",
+    id: "1",
+    content:
+      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
     username: "@dingzhen",
-  },
-  {
-    id: 6,
-    content: "cma你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-  },
-  {
-    id: 7,
-    content: "cma你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
+    likes: "12",
+    headurl: "123",
   },
 ];
-var num = 8;
-function handScroll() {
-  let scrollTop = contentbox.value.scrollTop;
-  let scrollHeight = contentbox.value.scrollHeight;
-  let clientHeight = contentbox.value.clientHeight;
-  if (scrollTop + clientHeight >= scrollHeight) {
-    console.log("没有评论了捏");
-    isloading.value = true;
-    list.push({
-      id: num,
-      content:
-        "cma我是傻逼我是傻逼我是傻逼我是傻逼我是傻逼我是傻逼我是傻逼我是傻逼",
-      pubtime: "1小时前·浙江",
-      username: "@dingzhen",
-    });
-    isloading.value = false;
-    num += 1;
+var num = 81;
+async function get(delay: number) {
+  return new Promise((resolve) => setTimeout(resolve, delay));
+}
+async function handScroll() {
+  if (!isloading.value) {
+    let scrollTop = contentbox.value.scrollTop;
+    let scrollHeight = contentbox.value.scrollHeight;
+    let clientHeight = contentbox.value.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      isloading.value = true;
+      list.push({
+        id: "1" + num,
+        content:
+          "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
+        pubtime: "昨天",
+        username: "@dingzhen" + num,
+        likes: "12",
+        headurl: "123",
+      });
+      await get(2000);
+      isloading.value = false;
+      num += 1;
+    }
   }
 }
 
 interface comment {
+  id: string;
   content: string;
   username: string;
   headurl: string;
@@ -96,6 +107,27 @@ interface comment {
 }
 </script>
 <style scoped>
+.comment-bodys::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0);
+  background-color: rgb(20, 19, 19); */
+}
+/*定义滚动条整体的样式*/
+.comment-bodys::-webkit-scrollbar {
+  width: 6px;
+  /* background-color: rgb(20, 19, 19); */
+}
+/*滚动条的样式*/
+.comment-bodys::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.2, rgb(125, 126, 128)),
+    color-stop(0.4, rgb(97, 98, 99)),
+    color-stop(0.8, rgb(125, 126, 128))
+  );
+}
 .comment-container {
   height: 100%;
   width: 100%;
@@ -107,12 +139,13 @@ interface comment {
   color: white;
   display: flex;
   height: 40px;
+  margin-left: 20px;
   align-items: center;
 }
 .comment-bodys {
   height: 100%;
   width: 100%;
-  overflow: overlay;
+  overflow-y: overlay;
 }
 .commentsBoxs {
   display: flex;
