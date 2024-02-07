@@ -1,7 +1,9 @@
 <template>
   <div class="videoContainer">
+    <div class="pre-back"></div>
+    <div class="shadow"></div>
     <div class="background">
-      <canvas id="canvas"></canvas>
+      <canvas id="canvas" class="canvas" ref="canvas"></canvas>
     </div>
     <div class="vbox">
       <div class="expand" @click="showSide()" v-show="!showside">
@@ -181,12 +183,11 @@
       <div class="videoBlock">
         <video
           class="videoEntity"
-          autoplay
           ref="rv"
           @click="change()"
           @timeupdate="update()"
         >
-          <source src="../../../public/2.mp4" />
+          <source :src="props.videoSrc" />
         </video>
         <div class="controller">
           <div class="progressBar" @click="tapProgressBar" ref="progressBar">
@@ -248,13 +249,16 @@
 import { ref, defineProps } from "vue";
 import { onMounted } from "vue";
 import VideoSide from "@/views/videoSide/index.vue";
+var props = defineProps({
+  videoSrc: String,
+});
 var sideStatus = ref(2);
 var showside = ref(false);
 var likeStatus = false;
 var likecolor = ref("white");
 var video = null;
 var likeButton = ref();
-var playing = ref(true);
+var playing = ref(false);
 var timenow = ref("00:00");
 var duration = ref("00:00");
 var rv = ref();
@@ -309,14 +313,15 @@ onMounted(() => {
       (videoDuration.value % 60).toFixed().padStart(2, "0");
   };
 });
+var canvas = ref();
 function draw() {
-  var canvas = document.getElementById("canvas");
-  const context = canvas.getContext("2d");
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  canvas.style.scale = 1.6;
-  canvas.style.filter = "blur(30px)";
+  // var canvas = document.getElementById("canvas");
+  const context = canvas.value.getContext("2d");
+  canvas.value.width = video.videoWidth;
+  canvas.value.height = video.videoHeight;
+  context.drawImage(video, 0, 0, canvas.value.width, canvas.value.height);
+  canvas.value.style.scale = 1.6;
+  canvas.value.style.filter = "blur(30px)";
 }
 async function like() {
   if (likeStatus) {
@@ -358,12 +363,18 @@ async function save() {
     savecolor.value = "rgb(255,184,2)";
   }
 }
-defineProps([""]);
 </script>
 <style scoped>
 .numinfo {
   font-size: 13px;
   color: white;
+}
+.shadow {
+  z-index: -0.5;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.5) inset;
 }
 .sideBar {
   position: absolute;
@@ -388,6 +399,9 @@ defineProps([""]);
   height: 100%;
   width: 40%;
   min-width: 20%;
+}
+.canvas {
+  position: relative;
 }
 .details {
   display: flex;
@@ -517,6 +531,13 @@ defineProps([""]);
 }
 .vbox:hover {
   cursor: pointer;
+}
+.pre-back {
+  position: absolute;
+  z-index: -2;
+  background-color: black;
+  height: 100%;
+  width: 100%;
 }
 .background {
   position: absolute;
