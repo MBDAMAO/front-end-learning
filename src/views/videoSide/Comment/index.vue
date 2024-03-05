@@ -18,11 +18,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onMounted, defineProps } from "vue";
 import Loading from "@/components/Loadings/loading1.vue";
 import Comment from "@/components/Comment/index.vue";
+import { getVideoComments } from "@/apis/comment";
 var isloading = ref(false);
 var contentbox = ref();
+const props = defineProps({
+  vid: String,
+});
 var list: comment[] = [
   {
     id: "1",
@@ -33,43 +37,14 @@ var list: comment[] = [
     likes: "12",
     headurl: "123",
   },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
 ];
+onMounted(() => {
+  getVideoComments(props.vid).then((data) => {
+    list.push(...data.data);
+  });
+  console.log(list);
+});
+
 var num = 81;
 async function get(delay: number) {
   return new Promise((resolve) => setTimeout(resolve, delay));

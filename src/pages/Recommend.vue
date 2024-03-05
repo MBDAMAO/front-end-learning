@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="inner">
-      <Test videoSrc="1.mp4"></Test>
+      <Test videoSrc="1.mp4" vid="1"></Test>
     </div>
     <div class="inner">
-      <Test videoSrc="2.mp4"></Test>
+      <Test videoSrc="2.mp4" vid="1"></Test>
     </div>
     <div class="inner">
-      <Test videoSrc="3.mp4"></Test>
+      <Test videoSrc="3.mp4" vid="1"></Test>
     </div>
     <div class="inner">
-      <Test videoSrc="4.mp4"></Test>
+      <Test videoSrc="4.mp4" vid="1"></Test>
     </div>
   </div>
 </template>

@@ -9,3 +9,17 @@ export function getVideos() {
     method: "get",
   });
 }
+
+export function like(vid: string, status: string) {
+  return request({
+    url: "/video/like/" + vid + "/" + status,
+    method: "put",
+  });
+}
+
+export function getLikeStatus(vid: string) {
+  return request({
+    url: "/video/getLikesStatus/" + vid,
+    method: "get",
+  });
+}

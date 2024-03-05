@@ -86,7 +86,7 @@
               p-id="5249"
             ></path>
           </svg>
-          <div class="numinfo">114</div>
+          <div class="numinfo">{{ likeCount }}</div>
         </div>
         <div class="comment" v-on:click="openComment()">
           <svg
@@ -241,16 +241,19 @@
         @close-event="showSide()"
         @changeStatus="(p:number) => changeStatus(p)"
         :status="sideStatus"
+        :vid="props.vid"
       ></VideoSide>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { ref, defineProps, onBeforeMount } from "vue";
 import { onMounted } from "vue";
 import VideoSide from "@/views/videoSide/index.vue";
+import { getLikeStatus, like as likev } from "@/apis/video";
 var props = defineProps({
   videoSrc: String,
+  vid: String,
 });
 var sideStatus = ref(2);
 var showside = ref(false);
@@ -264,6 +267,7 @@ var duration = ref("00:00");
 var rv = ref();
 var progressNow = ref();
 var videoDuration = ref(0);
+var likeCount = ref(113);
 function changeStatus(p: number) {
   sideStatus.value = p;
 }
@@ -312,7 +316,16 @@ onMounted(() => {
       ":" +
       (videoDuration.value % 60).toFixed().padStart(2, "0");
   };
+  getLikeStatus(props.vid).then((data) => {
+    likeStatus = data.data === 1;
+    if (!likeStatus) {
+      likecolor.value = "white";
+    } else {
+      likecolor.value = "rgb(254,44,85)";
+    }
+  });
 });
+
 var canvas = ref();
 function draw() {
   // var canvas = document.getElementById("canvas");
@@ -327,9 +340,13 @@ async function like() {
   if (likeStatus) {
     likeStatus = false;
     likecolor.value = "white";
+    likeCount.value -= 1;
+    likev(props.vid, 0);
   } else {
     likeStatus = true;
+    likeCount.value += 1;
     likecolor.value = "rgb(254,44,85)";
+    likev(props.vid, 1);
   }
 }
 var saveStatus = false;

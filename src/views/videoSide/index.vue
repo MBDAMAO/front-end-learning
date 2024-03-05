@@ -56,7 +56,7 @@
       <Works></Works>
     </div>
     <div class="content" v-show="props.status == 2">
-      <Comments></Comments>
+      <Comments :vid="props.vid"></Comments>
     </div>
     <div class="content" v-show="props.status == 3">
       <Recommends></Recommends>
@@ -88,6 +88,7 @@ function open(params: number) {
 }
 var props = defineProps({
   status: Number,
+  vid: String,
 });
 </script>
 <style scoped>
