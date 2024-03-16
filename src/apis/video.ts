@@ -10,14 +10,14 @@ export function getVideos() {
   });
 }
 
-export function like(vid: string, status: string) {
+export function like(vid: string | undefined, status: string | undefined) {
   return request({
     url: "/video/like/" + vid + "/" + status,
     method: "put",
   });
 }
 
-export function getLikeStatus(vid: string) {
+export function getLikeStatus(vid: string | undefined) {
   return request({
     url: "/video/getLikesStatus/" + vid,
     method: "get",

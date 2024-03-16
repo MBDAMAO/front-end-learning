@@ -19,8 +19,8 @@
 </template>
 
 <script setup name="Navigator" lang="ts">
-import router from "@/router/index.ts";
-function push(path) {
+import router from "@/router/index";
+function push(path: string) {
   router.push(path);
 }
 </script>
@@ -31,6 +31,7 @@ function push(path) {
   width: 170px;
   height: 100%;
   background-color: rgb(22, 24, 35);
+
   .items {
     div {
       span {
@@ -38,7 +39,9 @@ function push(path) {
         margin-top: 15px;
         align-items: center;
       }
-      /* justify-content: center; */ /*水平居中*/
+
+      /* justify-content: center; */
+      /*水平居中*/
       display: flex;
       width: 130px;
       margin-left: 20px;
@@ -47,11 +50,11 @@ function push(path) {
       height: 50px;
       border-radius: 10px;
     }
+
     div:hover {
       color: #fff;
       background-color: rgb(39, 41, 51);
       cursor: pointer;
     }
   }
-}
-</style>
+}</style>

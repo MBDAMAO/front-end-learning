@@ -17,6 +17,25 @@ const routes: Array<RouteRecordRaw> = [
     path: "/test",
     component: () => import("../components/VideoWindow/Test.vue"),
   },
+  {
+    path: "/user",
+    component: () => import("../views/userPage/index.vue"),
+    children: [
+      {
+        path: "post",
+        component: () => import("../views/userPage/resources/posts/index.vue"),
+      },
+      {
+        path: "like",
+        component: () => import("../views/userPage/resources/like/index.vue"),
+      },
+      {
+        path: "collection",
+        component: () =>
+          import("../views/userPage/resources/collection/index.vue"),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

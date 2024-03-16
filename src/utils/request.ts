@@ -53,7 +53,7 @@ axios.interceptors.response.use(
     }
     ElMessage({
       showClose: true,
-      message: "Oops, this is a error message.",
+      message: error.message,
       type: "error",
     });
     return Promise.reject(error.response); // 返回接口返回的错误信息
