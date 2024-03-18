@@ -3,11 +3,17 @@
     <div class="comment-head">全部评论(125)</div>
     <div class="comment-bodys" @scroll="handScroll" ref="contentbox">
       <div class="commentsBoxs" v-for="item in list" :key="item.id">
-        <Comment :content="item.content" :username="item.username" :pubtime="item.pubtime" :likes="item.likes"></Comment>
+        <Comment :content="item.content" :username="item.username" :pubtime="item.pubtime" :likes="item.likes"
+          @func="reply"></Comment>
       </div>
       <Loading v-show="isloading"></Loading>
     </div>
     <div class="comment-foot">
+      <div class="replyTip" v-show="isReplyIng">
+        <div class="replyTo">{{ replyName }}</div>
+        <div class="content">{{ contentRefer }}</div>
+        <div class="cancel">{{ 'X' }}</div>
+      </div>
       <input class="commentInput" placeholder="留下你精彩的评论吧" />
     </div>
   </div>
@@ -19,21 +25,63 @@ import Comment from "@/components/Comment/index.vue";
 import { getVideoComments } from "@/apis/comment";
 var isloading = ref(false);
 var contentbox = ref();
+var isReplyIng = ref(false);
+var replyTo = ref(0)
+var replyName = ref('')
+var contentRefer = ref('')
+
 const props = defineProps({
   vid: String,
 });
+function reply(data: any) {
+  if (replyTo.value == data.id && isReplyIng.value) {
+    isReplyIng.value = false;
+  } else {
+    replyTo.value = data.id;
+    replyName.value = '@' + data.username;
+    contentRefer.value = data.content;
+    isReplyIng.value = true;
+  }
+}
 var list: comment[] = [
   {
     id: "1",
     content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
+      "我去，我最喜欢的一集",
+    pubtime: "昨天",
+    username: "飞舞",
+    likes: "12",
+    headurl: "123",
+  },
+  {
+    id: "2",
+    content:
+      "阿八八八八八八八",
+    pubtime: "昨天",
+    username: "田所浩二",
+    likes: "12",
+    headurl: "123",
+  },
+  {
+    id: "3",
+    content:
+      "？？？？？？？？？？？？？？？？",
     pubtime: "昨天",
     username: "@dingzhen",
     likes: "12",
     headurl: "123",
   },
   {
-    id: "1",
+    id: "4",
+    content:
+      "你说我有点难追，好让他知难而退，礼物必须挑最贵",
+    pubtime: "昨天",
+    username: "JayChou",
+    likes: "12",
+    headurl: "123",
+  },
+  {
+    id: "5",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
@@ -42,7 +90,7 @@ var list: comment[] = [
     headurl: "123",
   },
   {
-    id: "1",
+    id: "6",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
@@ -51,7 +99,7 @@ var list: comment[] = [
     headurl: "123",
   },
   {
-    id: "1",
+    id: "7",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
@@ -60,7 +108,7 @@ var list: comment[] = [
     headurl: "123",
   },
   {
-    id: "1",
+    id: "8",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
@@ -69,34 +117,7 @@ var list: comment[] = [
     headurl: "123",
   },
   {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
-    content:
-      "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-    pubtime: "昨天",
-    username: "@dingzhen",
-    likes: "12",
-    headurl: "123",
-  },
-  {
-    id: "1",
+    id: "9",
     content:
       "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
     pubtime: "昨天",
@@ -202,9 +223,10 @@ interface comment {
 }
 
 .comment-foot {
+  flex-direction: column;
   height: 80px;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
 
 .commentInput {

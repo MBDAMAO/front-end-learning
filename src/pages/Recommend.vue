@@ -2,14 +2,14 @@
   <div class="recommend-container" ref="container" @wheel="handleScroll">
     <div class="inner-wrapper">
       <div class="inner" v-for="(item, index) in items" :key="index" :id="'inner_' + index">
-        <Test :videoSrc="item.videoSrc" :ref="setTestRef(index)" :vid="item.vid"></Test>
+        <FeedModel :videoSrc="item.videoSrc" :ref="setTestRef(index)" :vid="item.vid"></FeedModel>
       </div>
     </div>
   </div>
 </template>
 
 <script setup name="Recommend" lang="ts">
-import Test from "@/components/VideoWindow/Test.vue";
+import FeedModel from "@/components/VideoWindow/index.vue";
 import { ref, onMounted, toRef, reactive } from 'vue';
 
 const container = ref<HTMLElement | null>(null);
@@ -27,9 +27,9 @@ var items: any = reactive([
   { videoSrc: "j (9).mp4", vid: "1" },
   { videoSrc: "j (10).mp4", vid: "1" }
 ]);
-const testRefs = ref<InstanceType<typeof Test>[]>([]);
+const testRefs = ref<InstanceType<typeof FeedModel>[]>([]);
 // 设置Test组件的引用  
-const setTestRef = (index: number) => (el: InstanceType<typeof Test> | null) => {
+const setTestRef = (index: number) => (el: InstanceType<typeof FeedModel> | null) => {
   if (el) {
     testRefs.value[index] = el;
   }
@@ -123,5 +123,6 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 </style>

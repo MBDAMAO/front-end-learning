@@ -141,8 +141,9 @@
 <script setup lang="ts">
 import { ref, defineProps } from "vue";
 import { onMounted } from "vue";
-import VideoSide from "@/views/videoSide/index.vue";
+import VideoSide from "./videoSide/index.vue";
 import { getLikeStatus, like as likev } from "@/apis/video";
+import LikeIcon from "@/svgs/SvgLike.vue"
 var props = defineProps({
   videoSrc: String,
   vid: String,
@@ -224,7 +225,6 @@ onMounted(() => {
 
 var canvas = ref();
 function draw() {
-  // var canvas = document.getElementById("canvas");
   const context = canvas.value.getContext("2d");
   canvas.value.width = video.videoWidth;
   canvas.value.height = video.videoHeight;

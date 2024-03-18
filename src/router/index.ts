@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/test",
-    component: () => import("../components/VideoWindow/Test.vue"),
+    component: () => import("../components/VideoWindow/index.vue"),
   },
   {
     path: "/user",

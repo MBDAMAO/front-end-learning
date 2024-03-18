@@ -14,7 +14,7 @@
         {{ props.pubtime }}
       </div>
       <div class="options">
-        <div class="opItem">
+        <div class="opItem" @click="reply">
           <Comment class="opIcon"></Comment>
           <div class="genshin">回复</div>
         </div>
@@ -22,9 +22,9 @@
           <Share class="opIcon"></Share>
           <div class="genshin">分享</div>
         </div>
-        <div class="opItem">
-          <Like class="opIcon"></Like>
-          <div class="genshin">{{ props.likes }}</div>
+        <div class="opItem" @click="like">
+          <Like class="opIcon" :fill="likeColor"></Like>
+          <div class="genshin">{{ Number(props.likes) + likeCount }}</div>
         </div>
         <div class="opItem">
           <HeartBreak class="opIcon"></HeartBreak>
@@ -34,11 +34,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref, defineEmits } from "vue";
 import Like from "@/svgs/SvgLike.vue";
 import Comment from "@/svgs/Comment.vue";
 import Share from "@/svgs/SvgShare.vue";
+import { PINK, GREY } from "@/constant/color";
 import HeartBreak from "@/svgs/SvgHeartBreak.vue";
+
+var likeCount = ref(0);
+var likeStatus = false;
+var likeColor = ref(GREY)
 const props = defineProps({
   id: String,
   content: String,
@@ -47,29 +52,52 @@ const props = defineProps({
   pubtime: String,
   likes: String,
 });
+function like() {
+  likeCount.value = 1 - likeCount.value;
+  if (likeStatus != true) {
+    likeColor.value = PINK;
+  } else {
+    likeColor.value = GREY;
+  }
+  likeStatus = likeStatus ? false : true
+}
+
+const emit = defineEmits(['func'])
+function reply() {
+  emit('func', {
+    'username': props.username,
+    'id': props.id,
+    'content': props.content
+  });
+}
 </script>
 <style scoped>
 .genshin {
   display: flex;
   align-items: center;
 }
+
 .opIcon {
   margin-right: 3px;
   fill: rgb(169, 169, 169);
 }
+
 .opItem {
   color: rgb(169, 169, 169);
   display: flex;
   margin-right: 10px;
   height: 100%;
 }
+
 .opItem:hover {
   cursor: pointer;
   color: white;
+
   .opIcon {
     fill: white;
   }
 }
+
 .container {
   position: relative;
   display: flex;
@@ -78,11 +106,13 @@ const props = defineProps({
   width: 100%;
   margin-bottom: 10px;
 }
+
 .img {
   height: 40px;
   width: 40px;
   border-radius: 50%;
 }
+
 .headSide {
   display: flex;
   height: 100%;
@@ -90,6 +120,7 @@ const props = defineProps({
   /* background-color: white; */
   margin-right: 8px;
 }
+
 .rightSide {
   height: 100%;
   width: 100%;
@@ -99,14 +130,17 @@ const props = defineProps({
   margin-bottom: 4px;
   /* background-color: antiquewhite; */
 }
+
 .name {
   height: 30px;
   color: rgb(169, 169, 169);
 }
+
 .time {
   margin-top: 5px;
   color: rgb(169, 169, 169);
 }
+
 .content {
   width: 100%;
   overflow: hidden;
@@ -115,6 +149,7 @@ const props = defineProps({
   display: flex;
   color: white;
 }
+
 .options {
   display: flex;
   height: 20px;

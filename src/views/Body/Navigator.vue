@@ -7,7 +7,7 @@
       <div @click="push('/recommend')"><span>推荐</span></div>
       <div @click="push('/follow')"><span>关注</span></div>
       <div @click="push('/friend')"><span>朋友</span></div>
-      <div @click="push('/user')"><span>我的</span></div>
+      <div @click="push('/user/like')"><span>我的</span></div>
       <br />
       <div><span>直播</span></div>
       <div><span>放映厅</span></div>
@@ -57,4 +57,5 @@ function push(path: string) {
       cursor: pointer;
     }
   }
-}</style>
+}
+</style>
