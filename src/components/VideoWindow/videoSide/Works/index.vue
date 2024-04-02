@@ -2,10 +2,10 @@
   <div class="cont">
     <div class="aworks">
       <div class="bb">
-        <img src="head.png" />
+        <img src="head.png"  alt=""/>
       </div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
+      <div class="bb"><img src="head.png"  alt=""/></div>
+      <div class="bb"><img src="head.png"  alt=""/></div>
       <div class="bb"><img src="head.png" /></div>
       <div class="bb"><img src="head.png" /></div>
       <div class="bb"><img src="head.png" /></div>
@@ -26,7 +26,7 @@
   height: 100%;
   display: flex;
   /*width: 100%; */
-  margin: 0px 0px 0px 20px;
+  margin: 0 0 0 20px;
   overflow-y: auto;
 }
 img {

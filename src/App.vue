@@ -1,6 +1,7 @@
 <template>
   <div class="containermain">
     <Header></Header>
+
     <Body></Body>
   </div>
 </template>
@@ -15,6 +16,7 @@ import Body from "@/views/Body/index.vue";
   height: 100%;
   display: flex;
 }
+
 html,
 body,
 #app {

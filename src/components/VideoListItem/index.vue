@@ -1,7 +1,7 @@
 <template>
   <div class="item-container" @click="openVideo()">
     <div class="view-box">
-      <img src="/head.png" class="coverimg" />
+      <img src="/head.png" class="coverimg"  alt=""/>
     </div>
     <div class="info-box">
       <div class="title">撒萨达斯阿祭祀撒asssssssssssssssssss</div>

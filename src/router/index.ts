@@ -7,18 +7,37 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/home",
-    component: () => import("../pages/Home.vue"),
+    name: "home",
+    component: () => import("../views/Home/index.vue"),
+  },
+  {
+    path: "/follow",
+    name: "follow",
+    component: () => import("../views/Follow/index.vue"),
+  },
+  {
+    path: "/friend",
+    name: "friend",
+    component: () => import("../views/Friends/index.vue"),
   },
   {
     path: "/recommend",
-    component: () => import("../pages/Recommend.vue"),
+    name: "recommend",
+    component: () => import("../views/Recommend/index.vue"),
   },
   {
     path: "/test",
+    name: "test",
     component: () => import("../components/VideoWindow/index.vue"),
   },
   {
+    path: "/live",
+    name: "live",
+    component: () => import("../views/Live/index.vue"),
+  },
+  {
     path: "/user",
+    name: "user",
     component: () => import("../views/userPage/index.vue"),
     children: [
       {
@@ -42,5 +61,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  if (to.matched[0].path) {
+    localStorage.setItem("currentState", to.matched[0].path);
+  }
+  next();
+});
 export default router;

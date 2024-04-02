@@ -1,7 +1,7 @@
 <template>
   <div class="vbox">
     <div class="cover">
-      <img class="coverImage" :src="url" />
+      <img class="coverImage" :src="url"  alt=""/>
     </div>
     <div class="details">
       <div class="title" :title="title">{{ truncatedTitle }}</div>
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup name="Video" lang="ts">
+<script setup lang="ts">
 import { defineProps, onMounted, ref } from "vue";
 const props = defineProps(["url", "vid", "ownername", "pubt", "title"]);
 const truncatedTitle = ref("");

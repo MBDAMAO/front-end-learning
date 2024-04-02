@@ -41,9 +41,9 @@ import Share from "@/svgs/SvgShare.vue";
 import { PINK, GREY } from "@/constant/color";
 import HeartBreak from "@/svgs/SvgHeartBreak.vue";
 
-var likeCount = ref(0);
-var likeStatus = false;
-var likeColor = ref(GREY)
+const likeCount = ref(0);
+let likeStatus = false;
+const likeColor = ref(GREY);
 const props = defineProps({
   id: String,
   content: String,
@@ -51,15 +51,16 @@ const props = defineProps({
   headurl: String,
   pubtime: String,
   likes: String,
+  obj: Object
 });
 function like() {
   likeCount.value = 1 - likeCount.value;
-  if (likeStatus != true) {
+  if (!likeStatus) {
     likeColor.value = PINK;
   } else {
     likeColor.value = GREY;
   }
-  likeStatus = likeStatus ? false : true
+  likeStatus = !likeStatus
 }
 
 const emit = defineEmits(['func'])

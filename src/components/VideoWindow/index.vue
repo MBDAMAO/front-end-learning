@@ -24,12 +24,12 @@
       </div>
       <div class="details">
         <div class="account">
-          <div class="uploader">@欢乐喜剧人</div>
-          <div class="pubTime">· 2022年6月8日</div>
+          <div class="uploader">@{{ props.modal?.author.nickname }}</div>
+          <div class="pubTime">· {{ props.modal?.video.publish_time }}</div>
         </div>
         <div class="title">
-          <div class="content">今天刚吃了粑粑，好开心！！1</div>
-          <div class="tags">#宝宝辅食 #司马</div>
+          <div class="content">{{ props.modal?.video.title }}</div>
+          <div class="tags">{{ props.modal?.video.tags }}</div>
         </div>
       </div>
       <div class="sideBar">
@@ -58,7 +58,7 @@
               d="M847.36 107.52h-665.6c-69.12 0-125.44 56.32-125.44 125.44v401.92c0 69.12 56.32 125.44 125.44 125.44h38.4l15.36 181.76 158.72-181.76h453.12c69.12 0 125.44-56.32 125.44-125.44V232.96c0-69.12-56.32-125.44-125.44-125.44z m-563.2 376.32c-33.28 0-61.44-28.16-61.44-61.44 0-33.28 28.16-61.44 61.44-61.44 33.28 0 61.44 28.16 61.44 61.44 2.56 33.28-25.6 61.44-61.44 61.44z m230.4 0c-33.28 0-61.44-28.16-61.44-61.44 0-33.28 28.16-61.44 61.44-61.44 33.28 0 61.44 28.16 61.44 61.44 0 33.28-28.16 61.44-61.44 61.44z m227.84 0c-33.28 0-61.44-28.16-61.44-61.44 0-33.28 28.16-61.44 61.44-61.44 33.28 0 61.44 28.16 61.44 61.44 2.56 33.28-25.6 61.44-61.44 61.44z"
               fill="#ffffff" p-id="15650"></path>
           </svg>
-          <div class="numinfo">10万</div>
+          <div class="numinfo">{{ props.modal?.statistics.comment_count }}</div>
         </div>
         <div class="save" v-on:click="save()">
           <svg t="1706801145907" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@
               d="M753.5 943.2c-9.7 0-21.1-3.2-30.8-8.1l-210.4-105-212 105.1c-21.1 11.2-48.5 9.7-68-4.9-19.3-14.6-30.8-40.4-25.8-64.6l43.7-226.5L83.7 483.7C66 466 59.5 438.3 66 415.7c8.1-24.3 27.4-42 53.4-45.4l231.2-42L454.1 118c11.2-22.6 33.9-37.2 58.1-37.2 24.3 0 48.5 14.6 58.1 37.2l103.5 210.3L905 368.7c24.3 3.2 45.4 21.1 51.9 45.4 8.1 24.3 1.5 50.1-16.2 68l-166.5 157 42 226.5c4.9 25.8-6.5 50.1-25.8 64.6-9.6 8.1-22.4 13-36.9 13z"
               p-id="17537"></path>
           </svg>
-          <div class="numinfo">14万</div>
+          <div class="numinfo">{{ props.modal?.statistics.save_count }}</div>
         </div>
         <div class="share">
           <svg t="1706801222228" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
               d="M627.2 171.264a25.6 25.6 0 0 1 16.768 6.2464l319.3088 276.736a25.6 25.6 0 0 1 0 38.7072l-319.3088 276.736a25.6 25.6 0 0 1-42.368-19.3536V614.4H435.2c-167.9872 0-310.784 107.8784-362.9056 258.1248A408.9344 408.9344 0 0 1 51.2 742.4c0-226.2272 183.3728-409.6 409.6-409.6h140.8V196.864a25.6 25.6 0 0 1 25.6-25.6z"
               p-id="20249" fill="#ffffff"></path>
           </svg>
-          <div class="numinfo">114万</div>
+          <div class="numinfo">{{ props.modal?.statistics.share_count }}</div>
         </div>
         <div class="more" v-on:click="openMoreSide()">
           <svg t="1706801332358" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@
 
       <div class="videoBlock">
         <video class="videoEntity" ref="rv" @click="change()" @timeupdate="update()">
-          <source :src="props.videoSrc" />
+          <source :src="'j (1).mp4'" />
         </video>
         <div class="controller">
           <div class="progressBar" @click="tapProgressBar" ref="progressBar">
@@ -132,9 +132,9 @@
         </div>
       </div>
     </div>
-    <div class="sideInfo" v-show="showside">
+    <div class="sideInfo" v-if="showside">
       <VideoSide @close-event="showSide()" @changeStatus="(p: number) => changeStatus(p)" :status="sideStatus"
-        :vid="props.vid"></VideoSide>
+        :vid="props.modal?.feed_item_id"></VideoSide>
     </div>
   </div>
 </template>
@@ -144,26 +144,26 @@ import { onMounted } from "vue";
 import VideoSide from "./videoSide/index.vue";
 import { getLikeStatus, like as likev } from "@/apis/video";
 import LikeIcon from "@/svgs/SvgLike.vue"
-var props = defineProps({
-  videoSrc: String,
-  vid: String,
+
+const props = defineProps({
+  modal: Object,
 });
 const exposedFunctions = {
   change
 };
-var sideStatus = ref(2);
-var showside = ref(false);
-var likeStatus = false;
-var likecolor = ref("white");
-var video: any = null;
-var likeButton = ref();
-var playing = ref(false);
-var timenow = ref("00:00");
-var duration = ref("00:00");
-var rv = ref();
-var progressNow = ref();
-var videoDuration = ref(0);
-var likeCount = ref(113);
+const sideStatus = ref(2);
+const showside = ref(false);
+let likeStatus = false;
+const likecolor = ref("white");
+let video: any = null;
+const likeButton = ref();
+const playing = ref(false);
+const timenow = ref("00:00");
+const duration = ref("00:00");
+const rv = ref();
+const progressNow = ref();
+const videoDuration = ref(0);
+const likeCount = ref();
 function changeStatus(p: number) {
   sideStatus.value = p;
 }
@@ -193,7 +193,9 @@ function update() {
   progressNow.value.style.width =
     "" + (video.currentTime / video.duration) * 100 + "%";
 }
-var progressBar: any = ref(null);
+
+const progressBar: any = ref(null);
+
 function tapProgressBar(event: Event | any) {
   if (progressBar.value == null) return;
   let rect = progressBar.value.getBoundingClientRect();
@@ -201,8 +203,8 @@ function tapProgressBar(event: Event | any) {
   video.currentTime = clickPercentage * video.duration;
 }
 onMounted(() => {
-  // 放到这里不然获取不到...
-  video = rv.value; //document.getElementById("rv");
+  likeCount.value = props.modal?.statistics.like_count
+  video = rv.value;
   video.onloadeddata = () => {
     draw();
   };
@@ -213,14 +215,12 @@ onMounted(() => {
       ":" +
       (videoDuration.value % 60).toFixed().padStart(2, "0");
   };
-  getLikeStatus(props.vid).then((data) => {
-    likeStatus = data.data === 1;
-    if (!likeStatus) {
-      likecolor.value = "white";
-    } else {
-      likecolor.value = "rgb(254,44,85)";
-    }
-  });
+  likeStatus = props.modal?.video.like_status;
+  if (!likeStatus) {
+    likecolor.value = "white";
+  } else {
+    likecolor.value = "rgb(254,44,85)";
+  }
 });
 
 var canvas = ref();
@@ -237,16 +237,17 @@ async function like() {
     likeStatus = false;
     likecolor.value = "white";
     likeCount.value -= 1;
-    likev(props.vid, "1");
+    likev(props.modal?.feed_item_id, "1");
   } else {
     likeStatus = true;
     likeCount.value += 1;
     likecolor.value = "rgb(254,44,85)";
-    likev(props.vid, "1");
+    likev(props.modal?.feed_item_id, "1");
   }
 }
-var saveStatus = false;
-var savecolor = ref("white");
+
+let saveStatus = false;
+const savecolor = ref("white");
 function openMoreSide() {
   if (!showside.value) {
     sideStatus.value = 3;
@@ -298,7 +299,7 @@ async function save() {
   height: 500px;
   width: 50px;
   padding-right: 38px;
-  right: 0px;
+  right: 0;
   bottom: 50px;
   z-index: 99;
 }
@@ -315,7 +316,7 @@ async function save() {
 .sideInfo {
   height: 100%;
   width: 40%;
-  min-width: 20%;
+  min-width: 350px;
 }
 
 .canvas {
@@ -327,7 +328,7 @@ async function save() {
   flex-direction: column;
   position: absolute;
   z-index: 99;
-  padding: 16px 0px 16px 0px;
+  padding: 16px 0 16px 0;
   box-sizing: content-box;
   height: 70px;
   /* background-color: aqua; */
@@ -342,7 +343,7 @@ async function save() {
     display: flex;
 
     .uploader {
-      font-family: "PingFang SC";
+      font-family: "PingFang SC",serif;
       font-size: 19px;
       color: white;
       padding-left: 16px;
@@ -457,6 +458,7 @@ async function save() {
   width: 100%;
   display: flex;
   border-radius: 20px;
+  overflow-x: hidden;
 }
 
 .vbox {
@@ -560,7 +562,7 @@ async function save() {
 .follow {
   position: absolute;
   z-index: 100;
-  bottom: 0px;
+  bottom: 0;
 }
 
 .follow:hover {

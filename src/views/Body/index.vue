@@ -1,12 +1,12 @@
 <template>
   <div class="bodys">
-    <Navigatior></Navigatior>
+    <Navigator></Navigator>
     <router-view></router-view>
   </div>
 </template>
 
-<script setup name="Body" lang="ts">
-import Navigatior from "./Navigator.vue";
+<script setup lang="ts">
+import Navigator from "./Navigator.vue";
 </script>
 
 <style scoped>
