@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="headSide">
-      <img class="img" src="/head.png" />
+      <img class="img" src="/head.png"  alt=""/>
     </div>
     <div class="rightSide">
       <div class="name">
