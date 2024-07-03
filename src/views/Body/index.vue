@@ -12,6 +12,7 @@ import Navigator from "./Navigator.vue";
 <style scoped>
 .bodys {
   display: flex;
+  box-sizing: border-box;
   padding-top: 68px;
   width: 100%;
   height: 100%;

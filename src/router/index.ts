@@ -53,6 +53,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import("../views/userPage/resources/collection/index.vue"),
       },
+      {
+        path: "history",
+        component: () =>
+          import("../views/userPage/resources/history/index.vue"),
+      },
     ],
   },
 ];

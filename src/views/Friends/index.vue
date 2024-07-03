@@ -2,7 +2,7 @@
     <div class="recommend-container" ref="container" @wheel="handleScroll">
         <div class="inner-wrapper">
             <div class="inner" v-for="(item, index) in items" :key="index" :id="'inner_' + index">
-                <FeedModel :videoSrc="item.videoSrc" :ref="setTestRef(index)" :vid="item.vid"></FeedModel>
+                <FeedModel :modal="item" :videoSrc="item.videoSrc" :ref="setTestRef(index)" :vid="item.vid"></FeedModel>
             </div>
         </div>
     </div>
@@ -10,34 +10,26 @@
   
 <script setup lang="ts">
 import FeedModel from "@/components/VideoWindow/index.vue";
-import { ref, onMounted, toRef, reactive } from 'vue';
-
+import { ref, onMounted, reactive } from 'vue';
+import { getVideos } from "@/apis/video";
 const container = ref<HTMLElement | null>(null);
 const currentIndex = ref(0);
 
-const items: any = reactive([
-  {videoSrc: "j (1).mp4", vid: "1"},
-  {videoSrc: "j (2).mp4", vid: "1"},
-  {videoSrc: "j (3).mp4", vid: "1"},
-  {videoSrc: "j (4).mp4", vid: "1"},
-  {videoSrc: "j (5).mp4", vid: "1"},
-  {videoSrc: "j (6).mp4", vid: "1"},
-  {videoSrc: "j (7).mp4", vid: "1"},
-  {videoSrc: "j (8).mp4", vid: "1"},
-  {videoSrc: "j (9).mp4", vid: "1"},
-  {videoSrc: "j (10).mp4", vid: "1"}
-]);
+const items: any = reactive([]);
 const testRefs = ref<InstanceType<typeof FeedModel>[]>([]);
-// 设置Test组件的引用  
 const setTestRef = (index: number) => (el: InstanceType<typeof FeedModel> | null) => {
     if (el) {
         testRefs.value[index] = el;
     }
 };
 async function loadRecommend() {
-    items.push({ videoSrc: "j (11).mp4", vid: "1" })
-    items.push({ videoSrc: "j (12).mp4", vid: "1" })
-    items.push({ videoSrc: "j (13).mp4", vid: "1" })
+    getVideos().then((data: any) => {
+        items.push(...data.feed_list)
+    }).catch(() => {
+        items.push({ videoSrc: "j (11).mp4", vid: 1 })
+        items.push({ videoSrc: "j (12).mp4", vid: 1 })
+        items.push({ videoSrc: "j (13).mp4", vid: 1 })
+    })
 }
 const handleScroll = (e: WheelEvent) => {
     if (!container.value) return;
@@ -46,7 +38,6 @@ const handleScroll = (e: WheelEvent) => {
     e.preventDefault();
     if (currentIndex.value >= items.length - 2) {
         loadRecommend()
-
     }
     const innerElements = container.value.querySelectorAll('.inner');
     let closestIndex = 0;
@@ -74,13 +65,6 @@ const handleScroll = (e: WheelEvent) => {
     if (targetInner) {
         targetInner.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
         currentIndex.value = newIndex;
-
-        // // 获取新索引对应的Test组件实例  
-        // const prevTestComponent = testRefs.value[currentIndex.value - 1];
-        // if (prevTestComponent) {
-        //   // 调用Test组件的方法或访问其属性  
-        //   prevTestComponent.exposedFunctions.change(); // 假设Test组件有一个名为`change`的方法  
-        // }
     }
 };
 
@@ -110,7 +94,7 @@ onMounted(() => {
 .inner-wrapper {
     height: 100%;
     width: 100%;
-    height: 90%;
+    height: calc(100% - 12px);
     width: 98%;
     /* overflow-y: auto; */
     /* 允许容器内部滚动 */

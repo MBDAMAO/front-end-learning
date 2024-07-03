@@ -1,5 +1,5 @@
 <template>
-    <div class="collection-like">
+    <div class="collection-post">
         <div class="tt" v-for="item in dataList" :key="item.vid">
             <Blocks :videoUrl=item.cover :info=item.info></Blocks>
         </div>
@@ -33,18 +33,6 @@ async function getCollection() {
     // }
     get(200).then(() => {
         dataList.push(...[{
-            "cover": "/3.jpg",
-            "info": "1123154",
-            "vid": "1231"
-        }, {
-            "cover": "/3.jpg",
-            "info": "1123154",
-            "vid": "1231"
-        }, {
-            "cover": "/3.jpg",
-            "info": "1123154",
-            "vid": "1231"
-        }, {
             "cover": "/2.png",
             "info": "1123154",
             "vid": "1231"
@@ -55,10 +43,6 @@ async function getCollection() {
         }, {
             "cover": "/2.png",
             "info": "1123154",
-            "vid": "1231"
-        }, {
-            "cover": "/2.png",
-            "info": "我曾难自拔于是加尔饿大大苏打大娃1大苏打大苏打伟大",
             "vid": "1231"
         }])
         isLoading.value = false;
@@ -76,7 +60,7 @@ onMounted(() => {
     height: 30px;
 }
 
-.collection-like {
+.collection-post {
     display: flex;
     flex-wrap: wrap;
     width: 100%;

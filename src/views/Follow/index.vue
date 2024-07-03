@@ -17,7 +17,6 @@ import Recommend from "../Recommend/index.vue"
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
 }
 
 .side {
@@ -27,7 +26,6 @@ import Recommend from "../Recommend/index.vue"
 }
 
 .content {
-    position: relative;
     height: 100%;
     width: 100%;
 }

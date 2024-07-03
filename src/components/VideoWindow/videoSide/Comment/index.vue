@@ -1,7 +1,7 @@
 <template>
   <div class="comment-container">
     <div class="comment-head">全部评论(125)</div>
-    <div class="comment-bodys" @scroll="handScroll" ref="contentbox">
+    <div class="comment-bodys" ref="contentbox">
       <div class="commentsBoxs" v-for="item in list" :key="item.id">
         <Comment :content="item.content" :username="item.username" :pubtime="item.pubtime" :likes="item.likes"
           @func="reply"></Comment>
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, reactive } from "vue";
 import Loading from "@/components/Loadings/loading1.vue";
 import Comment from "@/components/Comment/index.vue";
 import { getVideoComments } from "@/apis/comment";
@@ -44,10 +44,13 @@ function reply(data: any) {
   }
 }
 
-const list: comment[] = [];
+const list: comment[] = reactive([]);
 onMounted(() => {
-  get(1000).then(() => {
-    isloading.value = true;
+  contentbox.value.addEventListener('onscroll', () => {
+    handScroll();
+  });
+  isloading.value = true;
+  get(200).then(() => {
     list.push({
       id: "1",
       content:

@@ -50,8 +50,8 @@ import Works from "./Works/index.vue";
 
 const status = ref(2);
 const b1 = ref(),
-    b2 = ref(),
-    b3 = ref();
+  b2 = ref(),
+  b3 = ref();
 
 function open(params: number) {
   b1.value.style.color = "rgba(169, 169, 169, 0.8)";

@@ -14,7 +14,7 @@
                 <router-link to="/user/collection" class="d1">
                     <div class="btn btn-default" :class="{ active: route.matched[1].path == '/user/collection' }">收藏</div>
                 </router-link>
-                <router-link to="/user/post" class="d1">
+                <router-link to="/user/history" class="d1">
                     <div class="btn btn-default" :class="{ active: route.matched[1].path == '/user/history' }">观看历史</div>
                 </router-link>
             </div>
@@ -58,12 +58,16 @@ const route = useRoute()
 
 .userMain {
     width: 80%;
+    max-width: 1212px;
     overflow-y: scroll;
     /* background-color: rgb(22, 24, 35); */
 }
 
 
 .userSwitch {
+    top: -1px;
+    background-color: rgb(23, 24, 35);
+    position: sticky;
     display: flex;
     flex-direction: row;
     height: 80px;

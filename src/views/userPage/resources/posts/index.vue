@@ -4,10 +4,10 @@
             <Blocks :videoUrl=item.cover :info=item.info></Blocks>
         </div>
     </div>
-    <div class="loading">
-        <Loading v-show="isLoading"></Loading>
+    <div class="loading" v-if="isLoading">
+        <Loading></Loading>
     </div>
-    <div class="nothing" v-if="isEmpty">
+    <div class="nothing" v-show="isEmpty">
         暂时没有更多了
     </div>
 </template>
@@ -31,8 +31,92 @@ async function getCollection() {
     // if (data.data.hasMore == false) {
     //     isEmpty = true;
     // }
-    get(1000).then(() => {
+    get(200).then(() => {
         dataList.push(...[{
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
+            "cover": "/2.png",
+            "info": "1123154",
+            "vid": "1231"
+        }, {
             "cover": "/2.png",
             "info": "1123154",
             "vid": "1231"
@@ -58,6 +142,7 @@ async function getCollection() {
             "vid": "1231"
         }])
         isLoading.value = false;
+        isEmpty.value = true;
     })
     // })
 }
@@ -67,12 +152,17 @@ onMounted(() => {
 </script>
 <style scoped>
 .collection-post {
-    display: grid;
-    grid-gap: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
 }
 
-@media (width > 1400px) {
+.loading {
+    width: 100%;
+    height: 30px;
+}
+
+/* @media (width > 1400px) {
     .collection-post {
         grid-template-columns: repeat(6, auto);
     }
@@ -94,15 +184,25 @@ onMounted(() => {
     .collection-post {
         grid-template-columns: repeat(3, auto);
     }
-}
+} */
 
 .tt {
+    margin-right: calc((100% - 180*6px)/5);
+    width: 180px;
     height: 300px;
-    width: 100%;
+    margin-bottom: 15px;
+}
+
+.tt:nth-child(6n) {
+    margin-right: 0 !important;
 }
 
 .nothing {
-    height: 200px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
     width: 100%;
 }
 </style>

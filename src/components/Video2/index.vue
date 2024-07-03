@@ -22,6 +22,7 @@ function open() {
 </script>
 <style scoped>
 .video2 {
+    border-radius: 10px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -39,16 +40,20 @@ function open() {
 }
 
 .imageDiv {
-    border-radius: 10px;
-    height: 90%;
+    height: 80%;
     width: 100%;
 }
 
 .infoDown {
+    box-sizing: border-box;
+    padding: 6px 6px 6px 6px;
+    background-color: rgb(38, 38, 50);
     color: white;
-    height: 10%;
+    height: 20%;
     width: 100%;
     word-wrap: break-word;
     word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

@@ -4,7 +4,7 @@
       <p>抖音🎶</p>
     </div>
     <div class="search">
-      <input class="main-input" type="text" placeholder="搜索你感兴趣的内容"/>
+      <input class="main-input" type="text" placeholder="搜索你感兴趣的内容" />
       <div class="searchBlock">
         <div class="box1">
           <div class="info">历史记录</div>
@@ -143,8 +143,8 @@
   <div class="loginTable" v-if="loginTableDisplay">
     <div class="block">
       <div class="inner">
-        <input v-model="username" class="inp1" placeholder="请输入用户名"/>
-        <input v-model="password" class="inp2" placeholder="请输入密码"/>
+        <input v-model="username" class="inp1" placeholder="请输入用户名" />
+        <input v-model="password" class="inp2" placeholder="请输入密码" />
         <button @click="loginF()" class="ensure" :class="{ 'redColor': canSubmit }" :disabled="!canSubmit">确认</button>
         <button @click="loginTableDisplay = false" class="exit">返回</button>
       </div>
@@ -153,8 +153,8 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed} from "vue";
-import {login} from "@/apis/user";
+import { ref, computed } from "vue";
+import { login } from "@/apis/user";
 
 const loginTableDisplay = ref(false);
 const password = ref("");
@@ -177,6 +177,7 @@ async function loginF() {
 <style scoped lang="scss">
 $red: rgb(255, 61, 94);
 $red-selected: rgb(249, 31, 67);
+
 @mixin flex-column-box {
   display: flex;
   flex-direction: column;
@@ -389,7 +390,7 @@ $red-selected: rgb(249, 31, 67);
 }
 
 .search:hover .searchBlock,
-.main-input:focus + .searchBlock {
+.main-input:focus+.searchBlock {
   display: flex;
 }
 

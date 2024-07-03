@@ -101,7 +101,7 @@
 
       <div class="videoBlock">
         <video class="videoEntity" ref="rv" @click="change()" @timeupdate="update()">
-          <source :src="'j (1).mp4'" />
+          <source :src="props.modal?.video.src" />
         </video>
         <div class="controller">
           <div class="progressBar" @click="tapProgressBar" ref="progressBar">
@@ -343,7 +343,7 @@ async function save() {
     display: flex;
 
     .uploader {
-      font-family: "PingFang SC",serif;
+      font-family: "PingFang SC", serif;
       font-size: 19px;
       color: white;
       padding-left: 16px;
