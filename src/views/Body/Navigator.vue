@@ -60,8 +60,6 @@ onMounted(() => {
         align-items: center;
       }
 
-      /* justify-content: center; */
-      /*水平居中*/
       display: flex;
       width: 130px;
       margin-left: 20px;

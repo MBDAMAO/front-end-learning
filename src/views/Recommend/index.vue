@@ -1,5 +1,6 @@
 <template>
 	<div class="recommend-container" ref="container" @wheel="handleScroll">
+		<Loading class="loading" v-if="isLoading"></Loading>
 		<div class="inner-wrapper">
 			<div class="inner" v-for="(item, index) in items" :key="index" :id="'inner_' + index">
 				<FeedModel :modal="item" :videoSrc="item.videoSrc" :ref="setTestRef(index)" :vid="item.vid"></FeedModel>
@@ -10,11 +11,12 @@
 
 <script setup lang="ts">
 import FeedModel from "@/components/VideoWindow/index.vue";
+import Loading from "@/components/Loadings/loading1.vue"
 import { ref, onMounted, reactive } from 'vue';
 import { getVideos } from "@/apis/video";
 const container = ref<HTMLElement | null>(null);
 const currentIndex = ref(0);
-
+const isLoading = ref(true);
 const items: any = reactive([]);
 const testRefs = ref<InstanceType<typeof FeedModel>[]>([]);
 const setTestRef = (index: number) => (el: InstanceType<typeof FeedModel> | null) => {
@@ -23,7 +25,7 @@ const setTestRef = (index: number) => (el: InstanceType<typeof FeedModel> | null
 	}
 };
 async function loadRecommend() {
-	getVideos().then((data: any) => {
+	await getVideos().then((data: any) => {
 		items.push(...data.feed_list)
 	}).catch(() => {
 		items.push({ videoSrc: "j (11).mp4", vid: 1 })
@@ -68,11 +70,12 @@ const handleScroll = (e: WheelEvent) => {
 	}
 };
 
-onMounted(() => {
-	loadRecommend()
+onMounted(async () => {
+	await loadRecommend()
 	if (container.value) {
 		container.value.addEventListener('wheel', handleScroll);
 	}
+	isLoading.value = false;
 });
 </script>
 
@@ -104,5 +107,16 @@ onMounted(() => {
 	justify-content: center;
 	align-items: center;
 	margin-bottom: 20px;
+}
+
+.loading {
+	position: absolute;
+	background-color: rgb(22, 24, 35);
+	z-index: 114515;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 </style>

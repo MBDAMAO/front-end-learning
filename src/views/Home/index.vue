@@ -40,6 +40,21 @@ let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "u
   { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
   { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
   { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
   { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }]);
 
 let close = ref(true);
@@ -110,15 +125,31 @@ const load = async () => {
 
 .homePage {
   box-sizing: border-box;
-  width: 98%;
+  width: calc(100% - 28px);
   padding: 0 5px 0 5px;
-  height: 100%;
 }
 
 .homeContainer {
   background-color: rgb(22, 24, 35);
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+}
+
+.homeContainer::-webkit-scrollbar {
+  width: 8px;
+  /* background-color: rgb(20, 19, 19); */
+}
+
+/*滚动条的样式*/
+.homeContainer::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-image: -webkit-gradient(linear,
+      left bottom,
+      left top,
+      color-stop(0.2, rgb(125, 126, 128)),
+      color-stop(0.4, rgb(97, 98, 99)),
+      color-stop(0.8, rgb(125, 126, 128)));
 }
 
 .banner {
