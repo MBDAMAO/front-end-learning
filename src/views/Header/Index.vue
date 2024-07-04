@@ -4,7 +4,7 @@
       <p>抖音🎶</p>
     </div>
     <div class="search">
-      <input class="main-input" type="text" placeholder="搜索你感兴趣的内容" />
+      <input class="main-input" id="main-input" type="text" placeholder="搜索你感兴趣的内容" @keyup.enter="push()" />
       <div class="searchBlock">
         <div class="box1">
           <div class="info">历史记录</div>
@@ -155,7 +155,12 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { login } from "@/apis/user";
-
+import router from "@/router/index";
+function push() {
+  let searchText = document.getElementById("main-input")?.value;
+  let path = `/search/${searchText}`;
+  router.push(path)
+}
 const loginTableDisplay = ref(false);
 const password = ref("");
 const username = ref("");
