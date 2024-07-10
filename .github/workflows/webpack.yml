@@ -25,8 +25,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Fix Vulnerabilities
-        run: npm audit fix
+      # - name: Fix Vulnerabilities
+      #   run: npm audit fix
 
       - name: Ensure webpack-cli is installed
         run: npm install -D webpack-cli
