@@ -30,14 +30,16 @@ onMounted(() => {
 
 <style scoped>
 .coverImage {
-  object-fit: cover;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  object-fit: fill;
+  margin-bottom: -5px;
 }
 
 .blo {
   height: 30px;
   display: flex;
+  overflow-x: hidden;
 }
 
 .title {
@@ -78,15 +80,15 @@ onMounted(() => {
 }
 
 .vbox {
-  height: 100%;
-  width: 100%;
+  //height: 100%;
+  //width: 100%;
   border-radius: 12px;
   background-color: rgb(37, 38, 50);
   transition: 200ms;
 }
 
 .cover {
-  height: 220px;
+  //height: 220px;
   background-color: black;
 }
 

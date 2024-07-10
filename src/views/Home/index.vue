@@ -30,32 +30,26 @@ import { getVideos } from "@/apis/video";
 const count: number[] = reactive([]);
 let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([
   { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }]);
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }
+]);
 
 let close = ref(true);
 function offShow() {
@@ -93,15 +87,59 @@ const load = async () => {
   scale: 1.02;
 }
 
-.item {
-  margin-right: calc((100% - 250*7px)/6);
-  margin-bottom: 10px;
-  width: 250px;
+@media screen and (max-width: 1200px) {
+  .item {
+    margin-right: calc((100% - 95.9%)/2);
+    margin-bottom: 10px;
+    width: 31.967%;
+  }
+  .item:nth-child(3n) {
+    margin-right: 0 !important;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .item {
+    margin-right: calc((100% - 95.9%)/3);
+    margin-bottom: 10px;
+    width: 23.975%;
+  }
+  .item:nth-child(4n) {
+    margin-right: 0 !important;
+  }
+}
+@media screen and (min-width: 1400px) and (max-width: 1600px) {
+  .item {
+    margin-right: calc((100% - 95.9%)/4);
+    margin-bottom: 10px;
+    width: 19.18%;
+  }
+  .item:nth-child(5n) {
+    margin-right: 0 !important;
+  }
+}
+@media screen and (min-width: 1600px) and (max-width: 1800px) {
+  .item {
+     margin-right: calc((100% - 95.9%)/5);
+     margin-bottom: 10px;
+     width: 15.983%;
+   }
+  .item:nth-child(6n) {
+    margin-right: 0 !important;
+  }
+}
+@media screen and (min-width: 1800px) {
+  .item {
+    margin-right: calc((100% - 95.9%)/6);
+    margin-bottom: 10px;
+    width: 13.7%;
+  }
+  .item:nth-child(7n) {
+     margin-right: 0 !important;
+  }
 }
 
-.item:nth-child(7n) {
-  margin-right: 0 !important;
-}
+
+
 
 .fullScreenFeed {
   height: 100%;
@@ -132,6 +170,7 @@ const load = async () => {
 .homeContainer {
   background-color: rgb(22, 24, 35);
   width: 100%;
+  min-width: 900px;
   height: 100%;
   overflow-y: scroll;
 }

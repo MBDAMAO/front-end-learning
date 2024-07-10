@@ -94,9 +94,7 @@ onMounted(async () => {
 }
 
 .inner-wrapper {
-	height: 100%;
-	width: 100%;
-	height: calc(100% - 12px);
+  height: calc(100% - 12px);
 	width: 98%;
 }
 
