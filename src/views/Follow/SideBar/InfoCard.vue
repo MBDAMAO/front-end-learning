@@ -1,7 +1,7 @@
 <template>
     <div class="con">
         <div class="imgHead">
-            <img src="/2.png" alt="">
+            <img src="../../../assets/2.png" alt="">
         </div>
         <div class="name">
             麦当劳都近点

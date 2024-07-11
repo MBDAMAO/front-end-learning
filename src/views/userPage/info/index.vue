@@ -2,7 +2,7 @@
     <div class="infoContainer">
         <div class="avatar">
             <div class="innerA">
-                <img src="../../../../public/head.png" alt="">
+                <img src="../../../assets/head.png" alt="">
             </div>
         </div>
         <div class="info">
@@ -32,7 +32,7 @@
         </div>
         <div class="setting">
             <div class="backImg">
-                <img src="/2.png" class="imgs" alt="">
+                <img src="../../../assets/2.png" class="imgs" alt="">
             </div>
             <div class="up">
 

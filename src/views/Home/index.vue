@@ -30,26 +30,22 @@ import banner from "@/assets/banner.png"
 import { getVideos } from "@/apis/video";
 const count: number[] = reactive([]);
 let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([
-  { "videoCoverUrl": "/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
+  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
 ]);
 
 let close = ref(true);

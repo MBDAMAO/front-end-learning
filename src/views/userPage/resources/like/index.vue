@@ -33,31 +33,31 @@ async function getCollection() {
     // }
     get(200).then(() => {
         dataList.push(...[{
-            "cover": "/3.jpg",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/3.jpg",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/3.jpg",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
             "info": "我曾难自拔于是加尔饿大大苏打大娃1大苏打大苏打伟大",
             "vid": "1231"
         }])

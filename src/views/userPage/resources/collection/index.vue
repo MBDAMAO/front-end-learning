@@ -33,34 +33,34 @@ async function getCollection() {
     // }
     get(200).then(() => {
         dataList.push(...[{
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "/2.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
             "info": "1123154",
             "vid": "1231"
-        }])
+        },])
         isLoading.value = false;
         isEmpty.value = true;
     })
