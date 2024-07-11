@@ -3,7 +3,7 @@
     <div class="homePage">
       <div class="banner" v-show="close">
         <div class="off" @click="offShow()">×关闭</div>
-        <img class="bannerImage" src="/banner.png" alt="广告位" />
+        <img class="bannerImage" :src="banner" alt="广告位" />
       </div>
       <div class="content">
         <div class="item" v-for="it in vlist" :key="it.ownerId">
@@ -26,6 +26,7 @@
 import { ref, reactive } from "vue";
 import Video from "@/components/Video.vue";
 import FeedModel from "@/components/VideoWindow/index.vue";
+import banner from "@/assets/banner.png"
 import { getVideos } from "@/apis/video";
 const count: number[] = reactive([]);
 let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([
@@ -93,48 +94,57 @@ const load = async () => {
     margin-bottom: 10px;
     width: 31.967%;
   }
+
   .item:nth-child(3n) {
     margin-right: 0 !important;
   }
 }
+
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
   .item {
     margin-right: calc((100% - 95.9%)/3);
     margin-bottom: 10px;
     width: 23.975%;
   }
+
   .item:nth-child(4n) {
     margin-right: 0 !important;
   }
 }
+
 @media screen and (min-width: 1400px) and (max-width: 1600px) {
   .item {
     margin-right: calc((100% - 95.9%)/4);
     margin-bottom: 10px;
     width: 19.18%;
   }
+
   .item:nth-child(5n) {
     margin-right: 0 !important;
   }
 }
+
 @media screen and (min-width: 1600px) and (max-width: 1800px) {
   .item {
-     margin-right: calc((100% - 95.9%)/5);
-     margin-bottom: 10px;
-     width: 15.983%;
-   }
+    margin-right: calc((100% - 95.9%)/5);
+    margin-bottom: 10px;
+    width: 15.983%;
+  }
+
   .item:nth-child(6n) {
     margin-right: 0 !important;
   }
 }
+
 @media screen and (min-width: 1800px) {
   .item {
     margin-right: calc((100% - 95.9%)/6);
     margin-bottom: 10px;
     width: 13.7%;
   }
+
   .item:nth-child(7n) {
-     margin-right: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
