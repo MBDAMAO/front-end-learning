@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <div class="headSide">
-      <img class="img" src="/head.png"  alt=""/>
+      <img class="img" :src=props.comment.user.avatar alt="" />
     </div>
     <div class="rightSide">
       <div class="name">
-        {{ props.username }}
+        {{ props.comment.user.nickname }}
       </div>
       <div class="content">
-        {{ props.content }}
+        {{ props.comment.text }}
       </div>
       <div class="time">
-        {{ props.pubtime }}
+        {{ props.comment.create_time }}
       </div>
       <div class="options">
         <div class="opItem" @click="reply">
@@ -24,7 +24,7 @@
         </div>
         <div class="opItem" @click="like">
           <Like class="opIcon" :fill="likeColor"></Like>
-          <div class="genshin">{{ Number(props.likes) + likeCount }}</div>
+          <div class="genshin">{{ Number(props.comment.likes) + likeCount }}</div>
         </div>
         <div class="opItem">
           <HeartBreak class="opIcon"></HeartBreak>
@@ -45,13 +45,7 @@ const likeCount = ref(0);
 let likeStatus = false;
 const likeColor = ref(GREY);
 const props = defineProps({
-  id: String,
-  content: String,
-  username: String,
-  headurl: String,
-  pubtime: String,
-  likes: String,
-  obj: Object
+  comment: Object
 });
 function like() {
   likeCount.value = 1 - likeCount.value;
@@ -66,9 +60,9 @@ function like() {
 const emit = defineEmits(['func'])
 function reply() {
   emit('func', {
-    'username': props.username,
-    'id': props.id,
-    'content': props.content
+    'username': props.comment.user.nickname,
+    'id': props.comment.cid,
+    'content': props.comment.text
   });
 }
 </script>

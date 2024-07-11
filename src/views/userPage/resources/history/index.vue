@@ -15,40 +15,19 @@
 import { ref, onMounted, reactive } from "vue";
 import Blocks from "@/components/Video2/index.vue"
 import Loading from "@/components/Loadings/loading1.vue"
-import { getCollection as igetCollection } from "@/apis/video"
+import { getHistory } from "@/apis/user"
 
 const isEmpty = ref(false);
 const isLoading = ref(true);
 const dataList: { "cover": string, "info": string, "vid": string }[] = reactive([]);
-
-async function get(delay: number) {
-    return new Promise((resolve) => setTimeout(resolve, delay));
-}
 async function getCollection() {
     if (isEmpty.value == true) return;
     isLoading.value = true;
-    // igetCollection().then((data) => {
-    // if (data.data.hasMore == false) {
-    //     isEmpty = true;
-    // }
-    get(200).then(() => {
-        dataList.push(...[{
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
-            "info": "1123154",
-            "vid": "1231"
-        }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
-            "info": "1123154",
-            "vid": "1231"
-        }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png",
-            "info": "1123154",
-            "vid": "1231"
-        }])
+    getHistory().then((data) => {
+        dataList.push(...data.data)
         isLoading.value = false;
         isEmpty.value = true;
     })
-    // })
 }
 onMounted(() => {
     getCollection()

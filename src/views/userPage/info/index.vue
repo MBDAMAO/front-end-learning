@@ -2,28 +2,28 @@
     <div class="infoContainer">
         <div class="avatar">
             <div class="innerA">
-                <img src="../../../assets/head.png" alt="">
+                <img :src=userInfo.avater alt="">
             </div>
         </div>
         <div class="info">
-            <p class="name">大帽</p>
+            <p class="name">{{ userInfo.name }}</p>
             <div class="statistic">
                 <div class="d1">
-                    关注 {{ 1 }}
+                    关注 {{ userInfo.follows }}
                 </div>
                 <div class="d1">
-                    粉丝 {{ 2 }}
+                    粉丝 {{ userInfo.fans }}
                 </div>
                 <div class="d1">
-                    获赞 {{ 3 }}
+                    获赞 {{ userInfo.likes }}
                 </div>
             </div>
             <div class="bizInfo">
                 <div class="uid">
-                    账号ID：{{ 112123545 }}
+                    账号ID：{{ userInfo.uid }}
                 </div>
                 <div class="gender">
-                    男
+                    {{ userInfo.gender }}
                 </div>
             </div>
             <div class="msg">
@@ -32,7 +32,7 @@
         </div>
         <div class="setting">
             <div class="backImg">
-                <img src="../../../assets/2.png" class="imgs" alt="">
+                <img :src=userInfo.back_img class="imgs" alt="">
             </div>
             <div class="up">
 
@@ -49,13 +49,20 @@
     </div>
 </template>
 <script setup lang='ts'>
-import { ref } from "vue";
+import { ref, onMounted, reactive } from "vue";
+import { getInfo } from "@/apis/user"
 
 const showEdit = ref(false);
 
 function edit() {
     showEdit.value = !showEdit.value;
 }
+var userInfo = reactive({})
+onMounted(() => {
+    getInfo().then((data) => {
+        Object.assign(userInfo, data.data);
+    })
+})
 </script>
 <style scoped>
 .backImg {

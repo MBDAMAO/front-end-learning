@@ -2,9 +2,8 @@
   <div class="comment-container">
     <div class="comment-head">全部评论(125)</div>
     <div class="comment-bodys" ref="contentbox">
-      <div class="commentsBoxs" v-for="item in list" :key="item.id">
-        <Comment :content="item.content" :username="item.username" :pubtime="item.pubtime" :likes="item.likes"
-          @func="reply"></Comment>
+      <div class="commentsBoxs" v-for="item in list" :key="item.cid">
+        <Comment :comment="item" @func="reply"></Comment>
       </div>
       <Loading v-show="isloading"></Loading>
     </div>
@@ -44,72 +43,18 @@ function reply(data: any) {
   }
 }
 
-const list: comment[] = reactive([]);
+const list: any[] = reactive([]);
 onMounted(() => {
-  contentbox.value.addEventListener('onscroll', () => {
-    handScroll();
-  });
+  // contentbox.value.addEventListener('onscroll', () => {
+  //   handScroll();
+  // });
   isloading.value = true;
-  get(200).then(() => {
-    list.push({
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    }, {
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    }, {
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    }, {
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    }, {
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    }, {
-      id: "1",
-      content:
-        "你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你你哈都i塞尼你",
-      pubtime: "昨天",
-      username: "@dingzhen",
-      likes: "12",
-      headurl: "123",
-    });
+  getVideoComments("1").then((data) => {
+    list.push(...data.comments);
     isloading.value = false;
   });
-  // getVideoComments(props.vid).then((data) => {
-  //   list.push(...data.data);
-  // });
 });
 
-async function get(delay: number) {
-  return new Promise((resolve) => setTimeout(resolve, delay));
-}
 async function handScroll() {
   if (!isloading.value) {
     let scrollTop = contentbox.value.scrollTop;
@@ -126,20 +71,11 @@ async function handScroll() {
         likes: "12",
         headurl: "123",
       });
-      await get(1000);
       isloading.value = false;
     }
   }
 }
 
-interface comment {
-  id: string;
-  content: string;
-  username: string;
-  headurl: string;
-  pubtime: string;
-  likes: string;
-}
 </script>
 <style scoped>
 /* .comment-bodys::-webkit-scrollbar-track {

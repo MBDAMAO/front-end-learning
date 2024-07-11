@@ -10,6 +10,13 @@ export function getVideos() {
   });
 }
 
+export function getHomeFeed() {
+  return request({
+    url: "/video/home_feed",
+    method: "get",
+  });
+}
+
 export function like(vid: string | undefined, status: string | undefined) {
   return request({
     url: "/video/like/" + vid + "/" + status,

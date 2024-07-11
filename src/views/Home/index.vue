@@ -23,43 +23,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import Video from "@/components/Video.vue";
 import FeedModel from "@/components/VideoWindow/index.vue";
 import banner from "@/assets/banner.png"
-import { getVideos } from "@/apis/video";
-const count: number[] = reactive([]);
-let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/2.png", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-  { "videoCoverUrl": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" },
-]);
+import { getHomeFeed } from "@/apis/video";
+let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([]);
 
 let close = ref(true);
 function offShow() {
   close.value = false;
 }
-let fl = 0;
-const load = async () => {
-  alert(1)
-  let videos = [{ "videoCoverUrl": "ss", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }, { "videoCoverUrl": "ss", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }, { "videoCoverUrl": "ss", "videoName": "ceshi", "ownerId": "15", "updateTime": "2024-01-05" }]
-  vlist.push(...videos);
-  count.push(fl);
-  fl += 5;
-};
+onMounted(() => {
+  getHomeFeed().then((data) => {
+    vlist.push(...data.data)
+  })
+})
 </script>
 
 <style scoped>
