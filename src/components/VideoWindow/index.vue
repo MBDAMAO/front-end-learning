@@ -34,7 +34,7 @@
       </div>
       <div class="sideBar">
         <div class="headimg">
-          <img class="himg" src="../../assets/head.png" />
+          <img class="himg" :src=props.modal?.author.head_img />
           <svg t="1706801829143" class="follow" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             p-id="11087" width="25" height="25">
             <path

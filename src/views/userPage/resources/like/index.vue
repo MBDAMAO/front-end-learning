@@ -45,19 +45,19 @@ async function getCollection() {
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg",
             "info": "1123154",
             "vid": "1231"
         }, {
-            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.png",
+            "cover": "http://sggjhw2qo.hb-bkt.clouddn.com/3.jpg",
             "info": "我曾难自拔于是加尔饿大大苏打大娃1大苏打大苏打伟大",
             "vid": "1231"
         }])
