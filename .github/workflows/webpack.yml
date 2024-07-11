@@ -15,14 +15,15 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout 🤔
+        uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }} 😋
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
+      - name: Install Dependencies 🤗
         run: npm install
 
       # - name: Fix Vulnerabilities
@@ -31,5 +32,10 @@ jobs:
       # - name: Ensure webpack-cli is installed
       #   run: npm install -D webpack-cli
 
-      - name: Build
+      - name: Build 😊
         run: npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
