@@ -28,8 +28,8 @@ jobs:
       # - name: Fix Vulnerabilities
       #   run: npm audit fix
 
-      - name: Ensure webpack-cli is installed
-        run: npm install -D webpack-cli
+      # - name: Ensure webpack-cli is installed
+      #   run: npm install -D webpack-cli
 
       - name: Build
-        run: npx webpack --config webpack.config.js
+        run: npm run build
