@@ -37,3 +37,10 @@ export function getCollection() {
     method: "get",
   });
 }
+
+export function getSimiarVideos() {
+  return request({
+    url: "/video/similar",
+    method: "get",
+  });
+}

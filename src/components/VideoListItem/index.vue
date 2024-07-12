@@ -1,22 +1,25 @@
 <template>
   <div class="item-container" @click="openVideo()">
     <div class="view-box">
-      <img src="../../assets/head.png" class="coverimg" alt="" />
+      <img :src=props.video.cover class="coverimg" alt="" />
     </div>
     <div class="info-box">
-      <div class="title">撒萨达斯阿祭祀撒asssssssssssssssssss</div>
+      <div class="title">{{ props.video.title }}</div>
       <div class="love-uploader">
         <div class="love">
           <Likes fill="rgba(169, 169, 169, 0.8)"></Likes>
-          12345
+          {{ props.video.likes }}
         </div>
-        <div class="uploader">damao</div>
+        <div class="uploader">{{ props.video.uploader }}</div>
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import Likes from "@/svgs/SvgLike.vue";
+const props = defineProps({
+  video: Object
+})
 function openVideo() {
   alert("打开视频");
 }
@@ -57,6 +60,7 @@ function openVideo() {
 }
 
 .info-box {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -14,7 +14,7 @@ import Body from "@/views/Body/index.vue";
 <style>
 .containermain {
   height: 100%;
-  display: flex;
+  width: 100%;
 }
 
 html,

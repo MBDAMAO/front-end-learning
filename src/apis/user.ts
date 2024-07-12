@@ -40,3 +40,9 @@ export function getPost() {
     method: "get",
   });
 }
+export function getWorks() {
+  return request({
+    url: "/user/works",
+    method: "get",
+  });
+}

@@ -1,14 +1,21 @@
 <template>
   <div class="cont">
     <div class="aworks">
-      <div class="bb"><img src="../../../../assets/head.png" /></div>
-      <div class="bb"><img src="../../../../assets/head.png" /></div>
-      <div class="bb"><img src="../../../../assets/head.png" /></div>
-      <div class="bb"><img src="../../../../assets/head.png" /></div>
+      <div class="bb" v-for="work in worksList" :key="work.id"><img :src=work.cover /></div>
     </div>
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { getWorks } from "@/apis/user"
+import { onMounted, reactive } from 'vue'
+const worksList: any[] = reactive([])
+onMounted(() => {
+  getWorks().then((data) => {
+    worksList.push(...data.data)
+  })
+})
+</script>
+
 <style scoped>
 .cont {
   overflow-y: scroll;
