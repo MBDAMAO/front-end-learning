@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 const props = defineProps(["url", "vid", "ownername", "pubt", "title"]);
 const truncatedTitle = ref("");
 const video1 = ref()
@@ -80,15 +80,15 @@ onMounted(() => {
 }
 
 .vbox {
-  //height: 100%;
-  //width: 100%;
+  /* height: 100%; */
+  /* width: 100%; */
   border-radius: 12px;
   background-color: rgb(37, 38, 50);
   transition: 200ms;
 }
 
 .cover {
-  //height: 220px;
+  /* height: 220px; */
   background-color: black;
 }
 

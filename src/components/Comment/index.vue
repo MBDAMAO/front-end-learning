@@ -34,7 +34,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, ref, defineEmits } from "vue";
+import { ref } from "vue";
 import Like from "@/svgs/SvgLike.vue";
 import Comment from "@/svgs/Comment.vue";
 import Share from "@/svgs/SvgShare.vue";

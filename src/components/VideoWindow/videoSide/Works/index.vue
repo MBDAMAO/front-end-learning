@@ -1,23 +1,10 @@
 <template>
   <div class="cont">
     <div class="aworks">
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
-      <div class="bb"><img src="head.png" /></div>
+      <div class="bb"><img src="../../../../assets/head.png" /></div>
+      <div class="bb"><img src="../../../../assets/head.png" /></div>
+      <div class="bb"><img src="../../../../assets/head.png" /></div>
+      <div class="bb"><img src="../../../../assets/head.png" /></div>
     </div>
   </div>
 </template>

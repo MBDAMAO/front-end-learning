@@ -139,7 +139,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import { onMounted } from "vue";
 import VideoSide from "./videoSide/index.vue";
 import { getLikeStatus, like as likev } from "@/apis/video";

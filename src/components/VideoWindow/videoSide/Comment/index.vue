@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, reactive } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import Loading from "@/components/Loadings/loading1.vue";
 import Comment from "@/components/Comment/index.vue";
 import { getVideoComments } from "@/apis/comment";

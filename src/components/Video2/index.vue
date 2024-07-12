@@ -9,7 +9,6 @@
     </div>
 </template>
 <script setup lang='ts'>
-import { defineProps } from "vue";
 const props = defineProps({
     info: String,
     videoUrl: String,

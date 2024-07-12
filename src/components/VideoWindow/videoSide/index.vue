@@ -43,7 +43,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 import Comments from "./Comment/index.vue";
 import Recommends from "./SimilarRecommend/index.vue";
 import Works from "./Works/index.vue";

@@ -1,7 +1,7 @@
 <template>
   <div class="item-container" @click="openVideo()">
     <div class="view-box">
-      <img src="/head.png" class="coverimg"  alt=""/>
+      <img src="../../assets/head.png" class="coverimg" alt="" />
     </div>
     <div class="info-box">
       <div class="title">撒萨达斯阿祭祀撒asssssssssssssssssss</div>
@@ -27,17 +27,21 @@ function openVideo() {
   height: 100px;
   width: 100%;
 }
+
 .item-container:hover {
   cursor: pointer;
 }
+
 .love {
   display: flex;
 }
+
 .coverimg {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
+
 .coverimg:hover {
   transition: 200ms;
   scale: 1.2;
@@ -51,11 +55,13 @@ function openVideo() {
   overflow: hidden;
   background-color: black;
 }
+
 .info-box {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .title {
   color: white;
   height: 50%;
@@ -64,6 +70,7 @@ function openVideo() {
   word-wrap: break-word;
   word-break: break-all;
 }
+
 .love-uploader {
   color: rgba(169, 169, 169, 0.8);
   display: flex;
