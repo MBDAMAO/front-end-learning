@@ -1,1 +1,0 @@
-import{l as e}from"./index-ER5VdmYQ.js";function i(){return e({url:"/video/feed",method:"get"})}function d(){return e({url:"/video/home_feed",method:"get"})}function u(o,t){return e({url:"/video/like/"+o+"/"+t,method:"put"})}export{i as a,d as g,u as l};
