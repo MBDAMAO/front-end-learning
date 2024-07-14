@@ -3,9 +3,23 @@ interface loginDTO {
   username: string;
   password: string;
 }
+interface registryDTO {
+  username: string;
+  password: string;
+  birthday: string;
+  sex: string;
+  email: string;
+}
 export function login(data: loginDTO) {
   return request({
     url: "/user/login",
+    method: "post",
+    data: data,
+  });
+}
+export function registry(data: registryDTO) {
+  return request({
+    url: "/user/registry",
     method: "post",
     data: data,
   });

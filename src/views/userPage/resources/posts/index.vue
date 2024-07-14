@@ -49,29 +49,6 @@ onBeforeMount(() => {
     height: 30px;
 }
 
-/* @media (width > 1400px) {
-    .collection-post {
-        grid-template-columns: repeat(6, auto);
-    }
-}
-
-@media (1400px >=width > 1200px) {
-    .collection-post {
-        grid-template-columns: repeat(5, auto);
-    }
-}
-
-@media (1200px >=width > 1000px) {
-    .collection-post {
-        grid-template-columns: repeat(4, auto);
-    }
-}
-
-@media (width <=1000px) {
-    .collection-post {
-        grid-template-columns: repeat(3, auto);
-    }
-} */
 @media screen and (width <1000px) {
     .tt {
         width: 100%;
@@ -129,8 +106,8 @@ onBeforeMount(() => {
 
 @media screen and (width >=1800px) {
     .tt {
-        margin-right: calc((100% - 180*6px)/5);
-        width: 180px;
+        margin-right: calc(5%/5);
+        width: 15.833%;
         margin-bottom: 15px;
     }
 

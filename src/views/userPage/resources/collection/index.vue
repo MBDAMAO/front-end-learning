@@ -49,39 +49,72 @@ onBeforeMount(() => {
     width: 100%;
 }
 
-/* @media (width > 1400px) {
-    .collection {
-        grid-template-columns: repeat(6, auto);
+
+@media screen and (width <1000px) {
+    .tt {
+        width: 100%;
+        margin-bottom: 15px;
     }
 }
 
-@media (1400px >=width > 1200px) {
-    .collection {
-        grid-template-columns: repeat(5, auto);
+@media screen and (width >=1000px) and (width <1200px) {
+    .tt {
+        margin-right: calc(5%/1);
+        width: 47.5%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(2n) {
+        margin-right: 0 !important;
     }
 }
 
-@media (1200px >=width > 1000px) {
-    .collection {
-        grid-template-columns: repeat(4, auto);
+@media screen and (width >=1200px) and (width <1400px) {
+    .tt {
+        margin-right: calc(5%/2);
+        width: 31.667%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(3n) {
+        margin-right: 0 !important;
     }
 }
 
-@media (width <=1000px) {
-    .collection {
-        grid-template-columns: repeat(3, auto);
+@media screen and (width >=1400px) and (width < 1600px) {
+    .tt {
+        margin-right: calc(5%/3);
+        width: 23.75%;
+        margin-bottom: 15px;
     }
-} */
 
-.tt {
-    margin-right: calc((100% - 180*6px)/5);
-    width: 180px;
-    height: 300px;
-    margin-bottom: 15px;
+    .tt:nth-child(4n) {
+        margin-right: 0 !important;
+    }
 }
 
-.tt:nth-child(6n) {
-    margin-right: 0 !important;
+@media screen and (width>=1600px) and (width <1800px) {
+    .tt {
+        margin-right: calc(5%/4);
+        width: 19%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(5n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (width >=1800px) {
+    .tt {
+        margin-right: calc(5%/5);
+        width: 15.833%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(6n) {
+        margin-right: 0 !important;
+    }
 }
 
 .nothing {
