@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeMount } from "vue";
 import Video from "@/components/Video.vue";
 import FeedModel from "@/components/VideoWindow/index.vue";
 import banner from "@/assets/banner.png"
@@ -34,7 +34,7 @@ let close = ref(true);
 function offShow() {
   close.value = false;
 }
-onMounted(() => {
+onBeforeMount(() => {
   getHomeFeed().then((data) => {
     vlist.push(...data.data)
   })
@@ -177,6 +177,7 @@ onMounted(() => {
 }
 
 .banner {
+  position: relative;
   height: 135px;
   border-radius: 10px;
   background-color: rgb(139, 140, 145);

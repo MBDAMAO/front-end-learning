@@ -12,7 +12,7 @@
     </div>
 </template>
 <script setup lang='ts'>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onBeforeMount, reactive } from "vue";
 import Blocks from "@/components/Video2/index.vue"
 import Loading from "@/components/Loadings/loading1.vue"
 import { getPost } from "@/apis/user"
@@ -33,7 +33,7 @@ async function getCollection() {
         isEmpty.value = true;
     })
 }
-onMounted(() => {
+onBeforeMount(() => {
     getCollection()
 })
 </script>
@@ -72,16 +72,71 @@ onMounted(() => {
         grid-template-columns: repeat(3, auto);
     }
 } */
-
-.tt {
-    margin-right: calc((100% - 180*6px)/5);
-    width: 180px;
-    height: 300px;
-    margin-bottom: 15px;
+@media screen and (width <1000px) {
+    .tt {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }
 
-.tt:nth-child(6n) {
-    margin-right: 0 !important;
+@media screen and (width >=1000px) and (width <1200px) {
+    .tt {
+        margin-right: calc(5%/1);
+        width: 47.5%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(2n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (width >=1200px) and (width <1400px) {
+    .tt {
+        margin-right: calc(5%/2);
+        width: 31.667%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(3n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (width >=1400px) and (width < 1600px) {
+    .tt {
+        margin-right: calc(5%/3);
+        width: 23.75%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(4n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (width>=1600px) and (width <1800px) {
+    .tt {
+        margin-right: calc(5%/4);
+        width: 19%;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(5n) {
+        margin-right: 0 !important;
+    }
+}
+
+@media screen and (width >=1800px) {
+    .tt {
+        margin-right: calc((100% - 180*6px)/5);
+        width: 180px;
+        margin-bottom: 15px;
+    }
+
+    .tt:nth-child(6n) {
+        margin-right: 0 !important;
+    }
 }
 
 .nothing {

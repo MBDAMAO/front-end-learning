@@ -12,7 +12,7 @@
     </div>
 </template>
 <script setup lang='ts'>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onBeforeMount, reactive } from "vue";
 import Blocks from "@/components/Video2/index.vue"
 import Loading from "@/components/Loadings/loading1.vue"
 import { getCollection as igetCollection } from "@/apis/user"
@@ -33,7 +33,7 @@ async function getCollection() {
         isEmpty.value = true;
     })
 }
-onMounted(() => {
+onBeforeMount(() => {
     getCollection()
 })
 </script>
