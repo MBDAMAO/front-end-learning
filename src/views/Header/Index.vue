@@ -136,7 +136,10 @@
         <div class="tougao">
         </div>
       </div>
-      <button class="login" @click="loginTableDisplay = true">登录</button>
+      <div class="header-headimg" v-if="isUserLoggedIn">
+        <img class="header-headimg-img">
+      </div>
+      <button v-if="!isUserLoggedIn" class="login" @click="loginTableDisplay = true">登录</button>
     </div>
 
   </div>
@@ -153,9 +156,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch, onBeforeMount } from "vue";
 import { login } from "@/apis/user";
+import { useUserStore } from "@/store/status"
 import router from "@/router/index";
+const userStore = useUserStore();
+const isUserLoggedIn = computed(() => userStore.isLoggedIn);
+
+// watch(() => userStore.user, (newVal) => {
+//   userInfo.value = newVal;
+// });
+
 function push() {
   let searchText = document.getElementById("main-input")?.value;
   let path = `/search/${searchText}`;
@@ -173,10 +184,14 @@ async function loginF() {
     username: username.value,
     password: password.value,
   });
-  console.log(data);
   localStorage.setItem("token", data.data.token);
+  userStore.login()
+  console.log(userStore.isLoggedIn)
   window.location.reload();
 }
+onBeforeMount(() => {
+  console.log(userStore.isLoggedIn)
+})
 </script>
 
 <style scoped lang="scss">
@@ -186,6 +201,12 @@ $red-selected: rgb(249, 31, 67);
 @mixin flex-column-box {
   display: flex;
   flex-direction: column;
+}
+
+.header-headimg {
+  background-color: #009fb7;
+  height: 100%;
+  width: 100px;
 }
 
 .payment {

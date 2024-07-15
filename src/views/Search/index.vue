@@ -29,41 +29,27 @@
                         </div>
                     </div>
                     <div class="results">
-                        <div class="vCont">
+                        <div class="vCont" v-for="item in vlist" :id="item.feed_item_id">
                             <div class="info">
                                 <div class="upInfo"></div>
                                 <div class="downInfo"></div>
                             </div>
-                            <Video class="video"></Video>
-                        </div>
-                        <div class="vCont">
-                            <div class="info">
-                                <div class="upInfo"></div>
-                                <div class="downInfo"></div>
-                            </div>
-                            <Video class="video"></Video>
-                        </div>
-                        <div class="vCont">
-                            <div class="info">
-                                <div class="upInfo"></div>
-                                <div class="downInfo"></div>
-                            </div>
-                            <Video class="video"></Video>
+                            <Video :modal="item" class="video"></Video>
                         </div>
                     </div>
                 </div>
                 <div class="right">
                     <div class="related">
-                        <div class="related-title"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
-                        <div class="related-info"></div>
+                        <div class="related-title">相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
+                        <div class="related-info">相关搜索相关搜索相关搜索</div>
                     </div>
                 </div>
             </div>
@@ -72,11 +58,20 @@
 </template>
 <script setup lang='ts'>
 import Video from "@/components/VideoWindow/index.vue";
+import { search } from "@/apis/search"
+import { onBeforeMount, reactive } from "vue"
+const vlist: any[] = reactive([])
+onBeforeMount(() => {
+    search("wtf").then((data) => {
+        vlist.push(...data.data)
+    })
+})
 </script>
 <style scoped>
 .outer {
     position: relative;
     overflow-y: scroll;
+    z-index: 0;
     height: 100%;
     width: 100%;
     background-color: rgb(22, 24, 35);
@@ -108,20 +103,19 @@ import Video from "@/components/VideoWindow/index.vue";
 
 .related-title {
     height: 50px;
-    width: 100%;
     background-color: azure;
 }
 
 .related-info {
     height: 35px;
-    width: 100%;
+    color: white;
     background-color: black;
     margin-bottom: 5px;
 }
 
 .related {
+    position: fixed;
     margin-top: 150px;
-    width: 100%;
     background-color: aquamarine;
 }
 
@@ -200,13 +194,13 @@ import Video from "@/components/VideoWindow/index.vue";
 }
 
 .left-head {
-    z-index: 1;
-    top: 0;
-    position: sticky;
+    z-index: 1145149;
+    position: fixed;
     display: flex;
     flex-direction: column;
     height: 100px;
-    width: 100%;
+    width: calc(100% - 600px);
+    background-color: rgb(22, 24, 35);
 }
 
 .types {
@@ -223,6 +217,7 @@ import Video from "@/components/VideoWindow/index.vue";
 }
 
 .results {
+    margin-top: 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -234,6 +229,7 @@ import Video from "@/components/VideoWindow/index.vue";
 }
 
 .right {
+    position: relative;
     width: 290px;
 }
 </style>
