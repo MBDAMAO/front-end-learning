@@ -4,44 +4,25 @@
       <p>抖音🎶</p>
     </div>
     <div class="search">
-      <input class="main-input" id="main-input" type="text" placeholder="搜索你感兴趣的内容" @keyup.enter="push()" />
+      <input class="main-input" v-model="mainInput" id="main-input" type="text" placeholder="搜索你感兴趣的内容"
+        @keyup.enter="push()" />
       <div class="searchBlock">
         <div class="box1">
           <div class="info">历史记录</div>
           <div class="histories">
-            <div class="testLine">不是哥们这是什么</div>
-            <div class="testLine">不是哥们这是什么</div>
-            <div class="testLine">不是哥们这是什么</div>
-            <div class="testLine">不是哥们这是什么</div>
-            <div class="testLine">1144714</div>
-            <div class="testLine">1144714</div>
-            <div class="testLine">1144714</div>
-            <div class="testLine">1144714</div>
-            <div class="testLine">1144714</div>
+            <div class="testLine" v-for="item in historyList" @click="addToInput(item.text)">{{ item.text }}</div>
           </div>
         </div>
         <div class="box2">
           <div class="info">猜你想搜</div>
           <div class="recommends">
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
-            <div class="testLine2">大事不好了！！！</div>
+            <div class="testLine2" v-for="item in recommendList" @click="pushValue(item.content)">{{ item.content }}</div>
           </div>
         </div>
         <div class="box3">
           <div class="info">热点</div>
           <div class="hots">
-            <div class="hTopic">大事不好了！！！</div>
-            <div class="hTopic">大事不好了！！！</div>
-            <div class="hTopic">大事不好了！！！</div>
-            <div class="hTopic">大事不好了！！！</div>
-            <div class="hTopic">大事不好了！！！</div>
-            <div class="hTopic">大事不好了！！！</div>
+            <div class="hTopic" v-for="item in hotList" @click="pushValue(item.content)">{{ item.content }}</div>
           </div>
         </div>
       </div>
@@ -53,37 +34,9 @@
         <div class="msg">
           <div class="chatName">钻石充值</div>
           <div class="select">
-            <div class="price">
-              <div class="up">10钻石</div>
-              <div class="down">￥1</div>
-            </div>
-            <div class="price">
-              <div class="up">60钻石</div>
-              <div class="down">￥6</div>
-            </div>
-            <div class="price">
-              <div class="up">300钻石</div>
-              <div class="down">￥30</div>
-            </div>
-            <div class="price">
-              <div class="up">980钻石</div>
-              <div class="down">￥98</div>
-            </div>
-            <div class="price">
-              <div class="up">2980钻石</div>
-              <div class="down">￥298</div>
-            </div>
-            <div class="price">
-              <div class="up">5980钻石</div>
-              <div class="down">￥598</div>
-            </div>
-            <div class="price">
-              <div class="up">19980钻石</div>
-              <div class="down">￥1998</div>
-            </div>
-            <div class="price">
-              <div class="up"></div>
-              <div class="down"></div>
+            <div class="price" v-for="item in priceList">
+              <div class="up">{{ item.content }}</div>
+              <div class="down">{{ item.price }}</div>
             </div>
           </div>
           <div class="payment">
@@ -104,14 +57,7 @@
         <div class="notice">
           <div class="chatName">互动消息</div>
           <div class="noticeBox">
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
+            <div class="noticeItem" v-for="item in noticeList"></div>
           </div>
         </div>
       </div>
@@ -120,14 +66,7 @@
         <div class="chat">
           <div class="chatName">私信</div>
           <div class="noticeBox">
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
-            <div class="noticeItem"></div>
+            <div class="noticeItem" v-for="item in chatList"></div>
           </div>
         </div>
       </div>
@@ -136,12 +75,39 @@
         <div class="tougao">
         </div>
       </div>
-      <div class="header-headimg" v-if="isUserLoggedIn">
-        <img class="header-headimg-img">
+      <div class="login-container" style="height: 100%;">
+        <div class="header-headimg" v-if="isUserLoggedIn">
+          <img class="header-headimg-img" src="http://dummyimage.com/400x400">
+          <div class="self-dropdown">
+            <div class="self-dropdown-header" style="height: 55px; width: 100%; display: flex; margin-bottom: 8px;">
+              <div class="self-dropdown-header-img-container" style="height:55px; width: 55px;  padding: 0 5px 0 5px;">
+                <div class="self-dropdown-header-img-warpper" style="height: 100%; width: 100%; border-radius: 50%;">
+                  <img class="self-dropdown-header-img" style="height: 100%; width: 100%;"
+                    src="http://dummyimage.com/400x400">
+                </div>
+              </div>
+              <div class="self-dropdown-header-info" style="height: 100%; width: calc(100% - 80px);">
+                <div class="self-dropdown-header-info-name" style="height: 50%; width: 100%; align-content: center;">
+                  1231
+                </div>
+                <div class="self-dropdown-header-info-statistics"
+                  style="height: 50%; width: 100%; align-content: center; ">
+                  123123
+                </div>
+              </div>
+            </div>
+            <div class="self-dropdown-item self-dropdown-likes"></div>
+            <div class="self-dropdown-item self-dropdown-collections"></div>
+            <div class="self-dropdown-item self-dropdown-histories"></div>
+            <div class="self-dropdown-item self-dropdown-watchsoon"></div>
+            <div class="self-dropdown-item self-dropdown-posts"></div>
+            <div class="self-dropdown-orders"></div>
+            <div class="self-dropdown-logout" @click="logout()">退出登录</div>
+          </div>
+        </div>
+        <button v-if="!isUserLoggedIn" class="login" @click="loginTableDisplay = true">登录</button>
       </div>
-      <button v-if="!isUserLoggedIn" class="login" @click="loginTableDisplay = true">登录</button>
     </div>
-
   </div>
   <div class="loginTable" v-if="loginTableDisplay">
     <div class="block">
@@ -156,41 +122,153 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeMount } from "vue";
+import { ref, computed, reactive, onBeforeMount } from "vue";
 import { login } from "@/apis/user";
 import { useUserStore } from "@/store/status"
 import router from "@/router/index";
-const userStore = useUserStore();
-const isUserLoggedIn = computed(() => userStore.isLoggedIn);
 
-// watch(() => userStore.user, (newVal) => {
-//   userInfo.value = newVal;
-// });
+// input
+const recommendList: any[] = reactive([])
+const hotList: any[] = reactive([])
+const historyList: any[] = reactive([])
+const setHistory = (data: any[]) => {
+  historyList.push(...data);
+}
+const setHots = (data: any[]) => {
+  hotList.push(...data);
+}
+const setRecommends = (data: any[]) => {
+  recommendList.push(...data);
+}
 
+// search
+const mainInput = ref()
+function addToInput(text: string) {
+  mainInput.value = text;
+}
 function push() {
   let searchText = document.getElementById("main-input")?.value;
   let path = `/search/${searchText}`;
-  router.push(path)
+  router.push({ path: path })
 }
+function pushValue(input: string) {
+  let path = `/search/${input}`;
+  router.push({ path: path })
+}
+
+// login & logout
+const userStore = useUserStore();
+const isUserLoggedIn = computed(() => userStore.isLoggedIn);
 const loginTableDisplay = ref(false);
-const password = ref("");
-const username = ref("");
+const password = ref();
+const username = ref();
 const canSubmit = computed(() => {
   return username.value !== '' && password.value !== ''
 });
-
 async function loginF() {
   let data = await login({
     username: username.value,
     password: password.value,
   });
+  console.log(data.data.token)
   localStorage.setItem("token", data.data.token);
   userStore.login()
   console.log(userStore.isLoggedIn)
   window.location.reload();
 }
+
+async function logout() {
+  localStorage.removeItem("token");
+  userStore.logout()
+  window.location.reload();
+}
+
+// price
+const priceList: any[] = reactive([])
+function setPrice(data: any[]) {
+  priceList.push(...data)
+}
+
+// noticeList
+const noticeList: any[] = reactive([])
+function setNotice(data: any[]) {
+  noticeList.push(...data)
+}
+// chatList
+const chatList: any[] = reactive([])
+function setChat(data: any[]) {
+  chatList.push(...data)
+}
 onBeforeMount(() => {
-  console.log(userStore.isLoggedIn)
+  setNotice([
+    {}, {}, {}, {}, {}, {}, {}, {}
+  ])
+  setChat([
+    {}, {}, {}, {}, {}, {}, {}, {}
+  ])
+  setHistory([
+    {
+      "text": "wtf"
+    },
+    {
+      "text": "你好"
+    },
+    {
+      "text": "嘻嘻了这下"
+    },
+  ])
+  setRecommends([
+    {
+      "content": "wtf"
+    },
+    {
+      "content": "你好"
+    },
+    {
+      "content": "嘻嘻了这下"
+    },
+  ])
+  setHots([
+    {
+      "content": "wtf"
+    },
+    {
+      "content": "你好"
+    },
+    {
+      "content": "嘻嘻了这下"
+    },
+  ])
+  setPrice([
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+    {
+      "content": "10钻石",
+      "price": "￥6"
+    },
+  ])
 })
 </script>
 
@@ -203,10 +281,45 @@ $red-selected: rgb(249, 31, 67);
   flex-direction: column;
 }
 
+.self-dropdown {
+  top: 63px;
+  margin-top: 5px;
+  max-height: 500px;
+  min-height: 400px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 15px 15px 15px 15px;
+  margin-top: 5px;
+  right: 20px;
+  width: 320px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 120;
+  display: none;
+  /* display: flex; */
+  flex-direction: column;
+  box-shadow: 0 0 20px 0 black;
+  background-color: rgb(37, 38, 50);
+}
+
+.login-container:hover {
+  .self-dropdown {
+    display: flex;
+  }
+}
+
 .header-headimg {
   background-color: #009fb7;
+  border-radius: 50%;
   height: 100%;
-  width: 100px;
+  width: 68px;
+}
+
+.header-headimg-img {
+  cursor: pointer;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .payment {
@@ -686,5 +799,30 @@ $red-selected: rgb(249, 31, 67);
   display: flex;
   background-color: rgb(22, 24, 35);
   justify-content: space-between;
+}
+
+.self-dropdown-logout {
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  align-content: center;
+  box-sizing: border-box;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.self-dropdown-item {
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgb(51, 52, 63);
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.self-dropdown-item:hover {
+  background-color: rgb(65, 66, 76);
 }
 </style>

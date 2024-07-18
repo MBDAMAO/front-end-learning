@@ -199,7 +199,8 @@ onBeforeMount(() => {
     display: flex;
     flex-direction: column;
     height: 100px;
-    width: calc(100% - 600px);
+    padding: 0 100% 0 0;
+    width: calc(100% - 390px);
     background-color: rgb(22, 24, 35);
 }
 
