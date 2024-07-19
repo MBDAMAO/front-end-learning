@@ -16,7 +16,8 @@
         <div class="box2">
           <div class="info">猜你想搜</div>
           <div class="recommends">
-            <div class="testLine2" v-for="item in recommendList" @click="pushValue(item.content)">{{ item.content }}</div>
+            <div class="testLine2" v-for="item in recommendList" @click="pushValue(item.content)">{{ item.content }}
+            </div>
           </div>
         </div>
         <div class="box3">
@@ -147,7 +148,7 @@ function addToInput(text: string) {
   mainInput.value = text;
 }
 function push() {
-  let searchText = document.getElementById("main-input")?.value;
+  let searchText = mainInput.value;
   let path = `/search/${searchText}`;
   router.push({ path: path })
 }

@@ -59,8 +59,18 @@
 <script setup lang='ts'>
 import Video from "@/components/VideoWindow/index.vue";
 import { search } from "@/apis/search"
-import { onBeforeMount, reactive } from "vue"
+import { onBeforeMount, reactive, watch } from "vue"
+import { useRoute } from "vue-router";
 const vlist: any[] = reactive([])
+const router = useRoute();
+
+watch(() => router.params, (newParams, oldParams) => {
+    alert(newParams.value)
+    search(Array.isArray(newParams.value) ? newParams.value[0] : newParams.value).then((data) => {
+        vlist.push(...data.data)
+    })
+})
+
 onBeforeMount(() => {
     search("wtf").then((data) => {
         vlist.push(...data.data)
