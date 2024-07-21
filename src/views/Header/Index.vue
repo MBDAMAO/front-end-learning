@@ -5,7 +5,7 @@
     </div>
     <div class="search">
       <input class="main-input" v-model="mainInput" id="main-input" type="text" placeholder="搜索你感兴趣的内容"
-        @keyup.enter="push()" />
+             @keyup.enter="push()"/>
       <div class="searchBlock">
         <div class="box1">
           <div class="info">历史记录</div>
@@ -62,13 +62,10 @@
           </div>
         </div>
       </div>
-      <div class="fake2">
+      <div class="fake2" v-on:mouseenter="chatBox.open()" v-on:mouseleave="chatBox.close()">
         <div class="content">私信</div>
         <div class="chat">
-          <div class="chatName">私信</div>
-          <div class="noticeBox">
-            <div class="noticeItem" v-for="item in chatList"></div>
-          </div>
+          <ChatBox ref="chatBox"></ChatBox>
         </div>
       </div>
       <div class="fake3">
@@ -76,15 +73,15 @@
         <div class="tougao">
         </div>
       </div>
-      <div class="login-container" style="height: 100%;">
+      <div class="login-container flex-center" style="height: 100%;">
         <div class="header-headimg" v-if="isUserLoggedIn">
-          <img class="header-headimg-img" src="http://dummyimage.com/400x400">
+          <img class="header-headimg-img" src="https://dummyimage.com/400x400" alt="">
           <div class="self-dropdown">
             <div class="self-dropdown-header" style="height: 55px; width: 100%; display: flex; margin-bottom: 8px;">
               <div class="self-dropdown-header-img-container" style="height:55px; width: 55px;  padding: 0 5px 0 5px;">
                 <div class="self-dropdown-header-img-warpper" style="height: 100%; width: 100%; border-radius: 50%;">
                   <img class="self-dropdown-header-img" style="height: 100%; width: 100%;"
-                    src="http://dummyimage.com/400x400">
+                       src="http://dummyimage.com/400x400">
                 </div>
               </div>
               <div class="self-dropdown-header-info" style="height: 100%; width: calc(100% - 80px);">
@@ -92,7 +89,7 @@
                   1231
                 </div>
                 <div class="self-dropdown-header-info-statistics"
-                  style="height: 50%; width: 100%; align-content: center; ">
+                     style="height: 50%; width: 100%; align-content: center; ">
                   123123
                 </div>
               </div>
@@ -113,8 +110,8 @@
   <div class="loginTable" v-if="loginTableDisplay">
     <div class="block">
       <div class="inner">
-        <input v-model="username" class="inp1" placeholder="请输入用户名" />
-        <input v-model="password" class="inp2" placeholder="请输入密码" />
+        <input v-model="username" class="inp1" placeholder="请输入用户名"/>
+        <input v-model="password" class="inp2" placeholder="请输入密码"/>
         <button @click="loginF()" class="ensure" :class="{ 'redColor': canSubmit }" :disabled="!canSubmit">确认</button>
         <button @click="loginTableDisplay = false" class="exit">返回</button>
       </div>
@@ -123,10 +120,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, onBeforeMount } from "vue";
-import { login } from "@/apis/user";
-import { useUserStore } from "@/store/status"
+import {ref, computed, reactive, onBeforeMount} from "vue";
+import {login} from "@/apis/user";
+import {useUserStore} from "@/store/status"
+import ChatBox from "./ChatBox/Index.vue"
 import router from "@/router/index";
+
+const chatBox = ref()
 
 // input
 const recommendList: any[] = reactive([])
@@ -144,17 +144,20 @@ const setRecommends = (data: any[]) => {
 
 // search
 const mainInput = ref()
+
 function addToInput(text: string) {
   mainInput.value = text;
 }
+
 function push() {
   let searchText = mainInput.value;
   let path = `/search/${searchText}`;
-  router.push({ path: path })
+  router.push({path: path})
 }
+
 function pushValue(input: string) {
   let path = `/search/${input}`;
-  router.push({ path: path })
+  router.push({path: path})
 }
 
 // login & logout
@@ -166,41 +169,48 @@ const username = ref();
 const canSubmit = computed(() => {
   return username.value !== '' && password.value !== ''
 });
+
 async function loginF() {
   let data = await login({
     username: username.value,
     password: password.value,
   });
-  console.log(data.data.token)
   localStorage.setItem("token", data.data.token);
+  userStore.setToken(data.data.token);
   userStore.login()
-  console.log(userStore.isLoggedIn)
   window.location.reload();
 }
 
 async function logout() {
   localStorage.removeItem("token");
+  userStore.setToken("");
   userStore.logout()
   window.location.reload();
 }
 
 // price
 const priceList: any[] = reactive([])
+
 function setPrice(data: any[]) {
   priceList.push(...data)
 }
 
 // noticeList
 const noticeList: any[] = reactive([])
+
 function setNotice(data: any[]) {
   noticeList.push(...data)
 }
+
 // chatList
 const chatList: any[] = reactive([])
+
 function setChat(data: any[]) {
   chatList.push(...data)
 }
+
 onBeforeMount(() => {
+
   setNotice([
     {}, {}, {}, {}, {}, {}, {}, {}
   ])
@@ -290,7 +300,6 @@ $red-selected: rgb(249, 31, 67);
   overflow-y: auto;
   box-sizing: border-box;
   padding: 15px 15px 15px 15px;
-  margin-top: 5px;
   right: 20px;
   width: 320px;
   border-radius: 10px;
@@ -310,17 +319,15 @@ $red-selected: rgb(249, 31, 67);
 }
 
 .header-headimg {
-  background-color: #009fb7;
-  border-radius: 50%;
-  height: 100%;
-  width: 68px;
+  height: 32px;
+  width: 32px;
 }
 
 .header-headimg-img {
   cursor: pointer;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
 }
 
 .payment {
@@ -360,7 +367,6 @@ $red-selected: rgb(249, 31, 67);
   overflow-y: auto;
   box-sizing: border-box;
   padding: 15px 0 15px 15px;
-  margin-top: 5px;
   left: -160px;
   width: 400px;
   border-radius: 10px;
@@ -402,10 +408,6 @@ $red-selected: rgb(249, 31, 67);
   display: flex;
 }
 
-.fake2:hover .chat {
-  display: flex;
-}
-
 .fake3:hover .notice {
   display: flex;
 }
@@ -413,45 +415,14 @@ $red-selected: rgb(249, 31, 67);
 .chat {
   top: 63px;
   margin-top: 5px;
-  height: 500px;
   box-sizing: border-box;
-  padding: 15px 0 15px 15px;
-  margin-top: 5px;
-  left: -200px;
-  width: 350px;
+  right: -100px;
   border-radius: 10px;
   position: absolute;
   z-index: 120;
-  display: none;
-  /* display: flex; */
-  flex-direction: column;
-  background-color: rgb(37, 38, 50);
+  display: flex;
+  //background-color: rgb(37, 38, 50);
   box-shadow: 0 0 20px 0 black;
-
-  .chatName {
-    height: 50px;
-  }
-
-  .noticeBox {
-    box-sizing: border-box;
-    overflow-y: auto;
-    width: 100%;
-    margin-top: 10px;
-    padding-right: 5px;
-
-    .noticeItem {
-      height: 80px;
-      width: 100%;
-      background-color: black;
-      border-radius: 10px;
-      margin-bottom: 5px;
-    }
-
-    .noticeItem:hover {
-      cursor: pointer;
-      background-color: rgb(53, 54, 65);
-    }
-  }
 }
 
 .box1 {
@@ -530,7 +501,7 @@ $red-selected: rgb(249, 31, 67);
 }
 
 .search:hover .searchBlock,
-.main-input:focus+.searchBlock {
+.main-input:focus + .searchBlock {
   display: flex;
 }
 
@@ -757,6 +728,7 @@ $red-selected: rgb(249, 31, 67);
   display: flex;
   min-width: 500px;
   justify-content: space-between;
+  align-items: center;
 
   .fake,
   .fake1,
