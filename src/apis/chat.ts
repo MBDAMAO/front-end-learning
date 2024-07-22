@@ -7,9 +7,14 @@ export function getChatList() {
     });
 }
 
-export function getChatHistory(id:string) {
+export function getChatHistory(id:any) {
     return request({
-        url: `/chat/history/${id}`,
-        method: "get",
+        url: `/chat/history`,
+        data: {
+            "uid" : id,
+            "page":1,
+            "pageSize":10,
+        },
+        method: "post",
     });
 }

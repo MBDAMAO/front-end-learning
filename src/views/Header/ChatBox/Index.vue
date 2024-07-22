@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import {onMounted, onUnmounted, reactive, ref, nextTick} from "vue"
 import Loading from "@/components/Loadings/loading1.vue"
-import {get} from "@/apis/test"
 import {useUserStore} from "@/store/status";
-import {getChatList} from "@/apis/chat";
+import {getChatHistory, getChatList} from "@/apis/chat";
 //chat
 // WebSocket 连接状态
 const ws = ref();
+
 const openWebSocket = () => {
 
   const userStore = useUserStore()
@@ -75,49 +75,8 @@ function openFullWindow(item: any) {
   chatMsgList.length = 0
   isLoading.value = true
   name.value = item.name
-  get(400).then(() => {
-    chatMsgList.push(...[
-      {
-        id: "123",
-        msg: "今天是带电脑上打扫得弄i啊",
-        isMyMsg: false,
-      },
-      {
-        id: "123",
-        msg: "今天是带电上打扫得弄i啊",
-        isMyMsg: false,
-      },
-      {
-        id: "123",
-        msg: "今天是带电脑扫得弄i啊",
-        isMyMsg: true,
-      },
-      {
-        id: "123",
-        msg: "今天是带电脑得弄i啊",
-        isMyMsg: false,
-      },
-      {
-        id: "123",
-        msg: "今天是带电都弄i啊",
-        isMyMsg: false,
-      },
-      {
-        id: "123",
-        msg: "今天是带电脑第三都爱电脑",
-        isMyMsg: true,
-      },
-      {
-        id: "123",
-        msg: "今天是带电脑",
-        isMyMsg: false,
-      },
-      {
-        id: "123",
-        msg: "今天是带电脑第三都爱电脑",
-        isMyMsg: false,
-      },
-    ])
+  getChatHistory(item.id).then((data) => {
+    chatMsgList.push(...data.data);
     isLoading.value = false
     nextTick(() => {
       chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
@@ -162,6 +121,7 @@ const close = () => {
   showChat.value = false;
 }
 
+// eslint-disable-next-line no-undef
 defineExpose({
   close,
   fClose,
@@ -185,12 +145,19 @@ let chatContainer: any = ref(null);
     <div class="chat-list" :style="chatListStyle">
       <div class="chatName">私信</div>
       <div class="noticeBox">
-        <div class="noticeItem" @click="openFullWindow(chatListItem)" v-for="chatListItem in chatList"
+        <div class="noticeItem flex" @click="openFullWindow(chatListItem)" v-for="chatListItem in chatList"
              :key="chatListItem.id">
           <div class="chat-msg-avatar">
             <img class="full" :src="chatListItem.avatar" alt="">
           </div>
-          <div class="chat-msg-info"></div>
+          <div class="chat-msg-info flex-column" style="padding-left: 10px; box-sizing: border-box; width: calc(100% - 40px);">
+            <div style="height: 50%">
+              {{ chatListItem.name }}
+            </div>
+            <div style="height: 50%">
+              {{ chatListItem.tips }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -296,6 +263,7 @@ let chatContainer: any = ref(null);
     padding-right: 9px;
 
     .noticeItem {
+      color: white;
       height: 60px;
       width: 100%;
       border-radius: 10px;

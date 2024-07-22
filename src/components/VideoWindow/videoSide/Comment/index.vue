@@ -5,7 +5,7 @@
       <div class="commentsBoxs" v-for="item in list" :key="item.cid">
         <Comment :comment="item" @func="reply"></Comment>
       </div>
-      <Loading v-show="isloading"></Loading>
+      <Loading v-show="isLoading"></Loading>
     </div>
     <div class="comment-foot">
       <div class="replyTip" v-show="isReplyIng">
@@ -22,8 +22,8 @@ import { ref, onMounted, reactive } from "vue";
 import Loading from "@/components/Loadings/loading1.vue";
 import Comment from "@/components/Comment/index.vue";
 import { getVideoComments } from "@/apis/comment";
-const isloading = ref(false);
-const contentbox = ref();
+const isLoading = ref(false);
+const contentBox = ref();
 const isReplyIng = ref(false);
 const replyTo = ref(0)
 const replyName = ref('')
@@ -48,20 +48,20 @@ onMounted(() => {
   // contentbox.value.addEventListener('onscroll', () => {
   //   handScroll();
   // });
-  isloading.value = true;
+  isLoading.value = true;
   getVideoComments("1").then((data) => {
     list.push(...data.comments);
-    isloading.value = false;
+    isLoading.value = false;
   });
 });
 
 async function handScroll() {
-  if (!isloading.value) {
-    let scrollTop = contentbox.value.scrollTop;
-    let scrollHeight = contentbox.value.scrollHeight;
-    let clientHeight = contentbox.value.clientHeight;
+  if (!isLoading.value) {
+    let scrollTop = contentBox.value.scrollTop;
+    let scrollHeight = contentBox.value.scrollHeight;
+    let clientHeight = contentBox.value.clientHeight;
     if (scrollTop + clientHeight >= scrollHeight) {
-      isloading.value = true;
+      isLoading.value = true;
       list.push({
         id: "1",
         content:
@@ -71,26 +71,17 @@ async function handScroll() {
         likes: "12",
         headurl: "123",
       });
-      isloading.value = false;
+      isLoading.value = false;
     }
   }
 }
 
 </script>
 <style scoped>
-/* .comment-bodys::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0);
-  background-color: rgb(20, 19, 19);
-} 
-*/
-
-/*定义滚动条整体的样式*/
 .comment-bodys::-webkit-scrollbar {
   width: 6px;
-  /* background-color: rgb(20, 19, 19); */
 }
 
-/*滚动条的样式*/
 .comment-bodys::-webkit-scrollbar-thumb {
   height: 20px;
   background-image: -webkit-gradient(linear,
@@ -120,7 +111,7 @@ async function handScroll() {
 .comment-bodys {
   height: 100%;
   width: 100%;
-  overflow-y: overlay;
+  overflow-y: scroll;
 }
 
 .commentsBoxs {

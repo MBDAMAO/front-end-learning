@@ -21,7 +21,7 @@ onMounted(() => {
 <style scoped>
 .cont {
   height: 100%;
-  overflow-y: overlay;
+  overflow-y: scroll;
 }
 
 .similarBox {

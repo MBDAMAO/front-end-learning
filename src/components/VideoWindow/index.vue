@@ -28,7 +28,7 @@
           <AddFollow></AddFollow>
         </div>
         <div class="like" v-on:click="like()">
-          <LikeIcon :fill="likecolor" ref="likeButton" class="icon1"></LikeIcon>
+          <LikeIcon :fill="likeColor" ref="likeButton" class="icon1"></LikeIcon>
           <div class="numinfo">{{ likeCount }}</div>
         </div>
         <div class="comment" v-on:click="openComment()">
@@ -68,7 +68,7 @@
                 <Pause2 v-show="!playing"/>
                 <Play v-show="playing"></Play>
               </div>
-              <div class="timeDetails">{{ timenow }} / {{ duration }}</div>
+              <div class="timeDetails">{{ timeNow }} / {{ duration }}</div>
             </div>
             <div class="right"></div>
           </div>
@@ -84,9 +84,10 @@
 <script setup lang="ts">
 import {onUnmounted, ref} from "vue";
 import {onMounted} from "vue";
-import Pause from "@/svgs/Pause.vue";
-import VideoSide from "./videoSide/index.vue";
 import {like as ILike} from "@/apis/video";
+import VideoSide from "./videoSide/index.vue";
+// svgs
+import Pause from "@/svgs/Pause.vue";
 import LikeIcon from "@/svgs/SvgLike.vue"
 import AddFollow from "@/svgs/AddFollow.vue";
 import Expand from "@/svgs/Expand.vue";
@@ -97,18 +98,17 @@ import SvgShare from "@/svgs/SvgShare.vue";
 import SvgVideoWindow from "@/svgs/SvgVideoWindow.vue";
 import Dotx3 from "@/svgs/Dotx3.vue";
 import Pause2 from "@/svgs/Pause2.vue";
-// eslint-disable-next-line no-undef
 const props = defineProps({
   modal: Object,
 });
 const sideStatus = ref(2);
 const showside = ref(false);
 let likeStatus = false;
-const likecolor = ref("white");
+const likeColor = ref("white");
 let video: any = null;
 const likeButton = ref();
 const playing = ref(false);
-const timenow = ref("00:00");
+const timeNow = ref("00:00");
 const duration = ref("00:00");
 const rv = ref();
 const progressNow = ref();
@@ -142,7 +142,7 @@ function pause() {
 }
 
 function update() {
-  timenow.value =
+  timeNow.value =
       (video.currentTime / 60).toFixed().padStart(2, "0") +
       ":" +
       (video.currentTime % 60).toFixed().padStart(2, "0");
@@ -174,9 +174,9 @@ onMounted(() => {
   };
   likeStatus = props.modal?.video.like_status;
   if (!likeStatus) {
-    likecolor.value = "white";
+    likeColor.value = "white";
   } else {
-    likecolor.value = "rgb(254,44,85)";
+    likeColor.value = "rgb(254,44,85)";
   }
 });
 onUnmounted(() => {
@@ -197,13 +197,13 @@ function draw() {
 async function like() {
   if (likeStatus) {
     likeStatus = false;
-    likecolor.value = "white";
+    likeColor.value = "white";
     likeCount.value -= 1;
     ILike(props.modal?.feed_item_id, "1");
   } else {
     likeStatus = true;
     likeCount.value += 1;
-    likecolor.value = "rgb(254,44,85)";
+    likeColor.value = "rgb(254,44,85)";
     ILike(props.modal?.feed_item_id, "1");
   }
 }

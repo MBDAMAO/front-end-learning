@@ -1,7 +1,7 @@
 <template>
   <div class="cont">
     <div class="aworks">
-      <div class="bb" v-for="work in worksList" :key="work.id"><img :src=work.cover /></div>
+      <div class="bb" v-for="work in worksList" :key="work.id"><img :src=work.cover  alt=""/></div>
     </div>
   </div>
 </template>
@@ -41,7 +41,6 @@ img:hover {
 }
 
 .bb {
-  height: 200px;
   width: calc(33.33% - 8px);
   overflow: hidden;
   justify-content: center;
@@ -72,15 +71,12 @@ img:hover {
 
 .cont::-webkit-scrollbar {
   width: 8px;
-  /* background-color: rgb(20, 19, 19); */
 }
 
-/*滚动条的样式*/
 .cont::-webkit-scrollbar-thumb {
   height: 20px;
-  background-image: -webkit-gradient(linear,
-      left bottom,
-      left top,
+  background-image:
+      -webkit-gradient(linear, left bottom, left top,
       color-stop(0.2, rgb(125, 126, 128)),
       color-stop(0.4, rgb(97, 98, 99)),
       color-stop(0.8, rgb(125, 126, 128)));
