@@ -74,7 +74,8 @@ function openFullWindow(item: any) {
   chatListStyle.value.width = "250px"
   chatMsgList.length = 0
   isLoading.value = true
-  name.value = item.name
+  friend = item.id;
+  name.value = item.username
   getChatHistory(item.id).then((data) => {
     chatMsgList.push(...data.data);
     isLoading.value = false
@@ -91,7 +92,7 @@ function sendMsg(msg: string) {
     id: "88",
     isMyMsg: true,
   })
-  sendMessage(JSON.stringify({toUid: ['44'], msg: msg}))
+  sendMessage(JSON.stringify({toUid: ["" + friend], msg: msg}))
   input.value = ""
   nextTick(() => {
     chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
@@ -137,6 +138,7 @@ const chatListStyle: any = ref({})
 const chatList: any = reactive([])
 const isLoading = ref(true)
 const name = ref()
+let friend = 1;
 let chatContainer: any = ref(null);
 </script>
 
@@ -152,7 +154,7 @@ let chatContainer: any = ref(null);
           </div>
           <div class="chat-msg-info flex-column" style="padding-left: 10px; box-sizing: border-box; width: calc(100% - 40px);">
             <div style="height: 50%">
-              {{ chatListItem.name }}
+              {{ chatListItem.username }}
             </div>
             <div style="height: 50%">
               {{ chatListItem.tips }}

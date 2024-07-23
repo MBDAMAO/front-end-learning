@@ -125,6 +125,7 @@ import {login} from "@/apis/user";
 import {useUserStore} from "@/store/status"
 import ChatBox from "./ChatBox/Index.vue"
 import router from "@/router/index";
+import {ElMessage} from "element-plus";
 
 const chatBox = ref()
 
@@ -171,10 +172,17 @@ const canSubmit = computed(() => {
 });
 
 async function loginF() {
-  let data = await login({
+  let data:any = await login({
     username: username.value,
     password: password.value,
   });
+  if (data.status_code != 0) {
+    ElMessage({
+      showClose: true,
+      message: data.msg,
+      type: "error",
+    });
+  }
   localStorage.setItem("token", data.data.token);
   userStore.setToken(data.data.token);
   userStore.login()

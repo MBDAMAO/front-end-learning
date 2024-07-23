@@ -2,11 +2,11 @@
     <div class="infoContainer">
         <div class="avatar">
             <div class="innerA">
-                <img :src=userInfo.avater alt="">
+                <img :src=userInfo.avatar alt="">
             </div>
         </div>
         <div class="info">
-            <p class="name">{{ userInfo.name }}</p>
+            <p class="name">{{ userInfo.username }}</p>
             <div class="statistic">
                 <div class="d1">
                     关注 {{ userInfo.follows }}

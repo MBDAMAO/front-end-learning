@@ -26,7 +26,7 @@ const setTestRef = (index: number) => (el: InstanceType<typeof FeedModel> | null
 };
 async function loadRecommend() {
 	await getVideos().then((data: any) => {
-		items.push(...data.feed_list)
+		items.push(...data.data)
 	}).catch(() => {
 		items.push({ videoSrc: "j (11).mp4", vid: 1 })
 		items.push({ videoSrc: "j (12).mp4", vid: 1 })

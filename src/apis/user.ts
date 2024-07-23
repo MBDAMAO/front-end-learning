@@ -26,7 +26,7 @@ export function registry(data: registryDTO) {
 }
 export function getInfo() {
   return request({
-    url: "/user/info",
+    url: "/user/self",
     method: "get",
   });
 }

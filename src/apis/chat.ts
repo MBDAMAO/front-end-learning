@@ -11,7 +11,7 @@ export function getChatHistory(id:any) {
     return request({
         url: `/chat/history`,
         data: {
-            "uid" : id,
+            "toUid" : id,
             "page":1,
             "pageSize":10,
         },

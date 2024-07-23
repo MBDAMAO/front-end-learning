@@ -7,7 +7,7 @@
       </div>
       <div class="content">
         <div class="item" v-for="it in vlist" :key="it.ownerId">
-          <Video :url="it.videoCoverUrl" :title="it.videoName" :ownername="it.ownerId" :pubt="it.updateTime"></Video>
+          <Video :url="it.cover" :title="it.title" :ownername="it.ownerId" :pubt="it.createTime"></Video>
         </div>
       </div>
     </div>
@@ -23,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onBeforeMount } from "vue";
+import { ref, reactive, onBeforeMount } from "vue";
 import Video from "@/components/Video.vue";
 import FeedModel from "@/components/VideoWindow/index.vue";
 import banner from "@/assets/banner.png"
 import { getHomeFeed } from "@/apis/video";
-let vlist: { "videoCoverUrl": string, "videoName": string, "ownerId": string, "updateTime": string }[] = reactive([]);
+let vlist: { "cover": string, "title": string, "ownerId": string, "createTime": string }[] = reactive([]);
 
 let close = ref(true);
 function offShow() {
