@@ -1,0 +1,1 @@
+System.register(["./index-legacy-QnigOX1w.js"],(function(e,t){"use strict";var r,n,u;return{setters:[e=>{r=e._,n=e.a,u=e.c}],execute:function(){e("default",r({},[["render",function(e,t){return n(),u("div")}]]))}}}));
