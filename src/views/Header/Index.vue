@@ -75,18 +75,18 @@
       </div>
       <div class="login-container flex-center" style="height: 100%;">
         <div class="header-headimg" v-if="isUserLoggedIn">
-          <img class="header-headimg-img" src="https://dummyimage.com/400x400" alt="">
+          <img class="header-headimg-img" :src="user.avatar" alt="">
           <div class="self-dropdown">
             <div class="self-dropdown-header" style="height: 55px; width: 100%; display: flex; margin-bottom: 8px;">
               <div class="self-dropdown-header-img-container" style="height:55px; width: 55px;  padding: 0 5px 0 5px;">
                 <div class="self-dropdown-header-img-warpper" style="height: 100%; width: 100%; border-radius: 50%;">
                   <img class="self-dropdown-header-img" style="height: 100%; width: 100%;"
-                       src="http://dummyimage.com/400x400">
+                       :src="user.avatar" alt="">
                 </div>
               </div>
               <div class="self-dropdown-header-info" style="height: 100%; width: calc(100% - 80px);">
                 <div class="self-dropdown-header-info-name" style="height: 50%; width: 100%; align-content: center;">
-                  1231
+                  {{ user.username }}
                 </div>
                 <div class="self-dropdown-header-info-statistics"
                      style="height: 50%; width: 100%; align-content: center; ">
@@ -121,13 +121,13 @@
 
 <script setup lang="ts">
 import {ref, computed, reactive, onBeforeMount} from "vue";
-import {login} from "@/apis/user";
+import {getInfo, login} from "@/apis/user";
 import {useUserStore} from "@/store/status"
 import ChatBox from "./ChatBox/Index.vue"
 import router from "@/router/index";
 import {ElMessage} from "element-plus";
-
-const chatBox = ref()
+const user:any = ref({})
+const chatBox:any = ref()
 
 // input
 const recommendList: any[] = reactive([])
@@ -153,11 +153,13 @@ function addToInput(text: string) {
 function push() {
   let searchText = mainInput.value;
   let path = `/search/${searchText}`;
+  historyList.push({"text": mainInput.value});
   router.push({path: path})
 }
 
 function pushValue(input: string) {
   let path = `/search/${input}`;
+  historyList.push({"text": input});
   router.push({path: path})
 }
 
@@ -172,7 +174,7 @@ const canSubmit = computed(() => {
 });
 
 async function loginF() {
-  let data:any = await login({
+  let data: any = await login({
     username: username.value,
     password: password.value,
   });
@@ -218,7 +220,12 @@ function setChat(data: any[]) {
 }
 
 onBeforeMount(() => {
-
+  if (isUserLoggedIn.value) {
+    getInfo().then((data) => {
+      user.value.avatar = data.data.avatar;
+      user.value.username = data.data.username;
+    })
+  }
   setNotice([
     {}, {}, {}, {}, {}, {}, {}, {}
   ])

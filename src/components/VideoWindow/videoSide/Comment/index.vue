@@ -49,8 +49,8 @@ onMounted(() => {
   //   handScroll();
   // });
   isLoading.value = true;
-  getVideoComments("1").then((data) => {
-    list.push(...data.comments);
+  getVideoComments(props.vid, 0).then((data) => {
+    list.push(...data.data);
     isLoading.value = false;
   });
 });

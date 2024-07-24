@@ -1,8 +1,8 @@
 import request from "@/utils/request";
 
-export function getVideoComments(vid: string | undefined) {
-  return request({
-    url: "/comment/list/" + vid,
-    method: "get",
-  });
+export function getVideoComments(vid: string | undefined, cursor: number) {
+    return request({
+        url: `/comment/list/${vid}?cursor=${cursor}`,
+        method: "get",
+    });
 }

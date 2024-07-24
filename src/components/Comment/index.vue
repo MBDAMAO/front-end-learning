@@ -5,13 +5,13 @@
     </div>
     <div class="rightSide">
       <div class="name">
-        {{ props.comment.user.nickname }}
+        {{ props.comment.user.username }}
       </div>
       <div class="content">
-        {{ props.comment.text }}
+        {{ props.comment.comment.content }}
       </div>
       <div class="time">
-        {{ props.comment.create_time }}
+        {{ props.comment.comment.create_time }}
       </div>
       <div class="options">
         <div class="opItem" @click="reply">
@@ -24,7 +24,7 @@
         </div>
         <div class="opItem" @click="like">
           <Like class="opIcon" :fill="likeColor"></Like>
-          <div class="genshin">{{ Number(props.comment.likes) + likeCount }}</div>
+          <div class="genshin">{{ Number(props.comment.comment.likes) + likeCount }}</div>
         </div>
         <div class="opItem">
           <HeartBreak class="opIcon"></HeartBreak>

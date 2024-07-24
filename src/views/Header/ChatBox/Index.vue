@@ -27,7 +27,7 @@ const openWebSocket = () => {
     chatMsgList.push({
       msg: obj.msg,
       id: obj.toUid,
-      isMyMsg: false,
+      is_my_msg: obj.is_my_msg,
     })
     nextTick(() => {
       chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
@@ -38,7 +38,7 @@ const openWebSocket = () => {
   ws.value.addEventListener('error', (event: any) => {
     console.error('WebSocket 连接出错:', event);
     // 尝试重连
-    // openWebSocket();
+    openWebSocket();
   });
 
   // 监听连接关闭事件
@@ -90,7 +90,7 @@ function sendMsg(msg: string) {
   chatMsgList.push({
     msg: msg,
     id: "88",
-    isMyMsg: true,
+    is_my_msg: true,
   })
   sendMessage(JSON.stringify({toUid: ["" + friend], msg: msg}))
   input.value = ""
@@ -181,10 +181,10 @@ let chatContainer: any = ref(null);
         </div>
         <div class="chat-one2one-content-item">
           <div
-              :style="{width: '100%', 'margin-bottom': '18px',display: 'flex','flex-direction': item.isMyMsg ?'row':'row-reverse'}"
+              :style="{width: '100%', 'margin-bottom': '18px',display: 'flex','flex-direction': item.is_my_msg ?'row':'row-reverse'}"
               v-for="item in chatMsgList" :key="item.id">
             <div style="width: calc(100% - 30px); padding: 0 10px 0 10px; box-sizing: border-box;">
-              <div :style="{display: 'flex','flex-direction': 'row', 'justify-content': item.isMyMsg ?'right':'left'}">
+              <div :style="{display: 'flex','flex-direction': 'row', 'justify-content': item.is_my_msg ?'right':'left'}">
                 <div style="background-color: rgb(65,66,76); max-width:200px; box-sizing: border-box; padding: 8px 14px;
                 border-radius: 10px; color: white; align-content: center; flex-wrap: wrap; font-size: 13px">{{
                     item.msg
