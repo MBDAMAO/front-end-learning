@@ -3,30 +3,10 @@
     <div class="left-logo">
       <p>抖音🎶</p>
     </div>
-    <div class="search">
+    <div class="search" v-on:mouseenter="searchTab.open()" v-on:mouseleave="searchTab.close()">
       <input class="main-input" v-model="mainInput" id="main-input" type="text" placeholder="搜索你感兴趣的内容"
-             @keyup.enter="push()"/>
-      <div class="searchBlock">
-        <div class="box1">
-          <div class="info">历史记录</div>
-          <div class="histories">
-            <div class="testLine" v-for="item in historyList" @click="addToInput(item.text)">{{ item.text }}</div>
-          </div>
-        </div>
-        <div class="box2">
-          <div class="info">猜你想搜</div>
-          <div class="recommends">
-            <div class="testLine2" v-for="item in recommendList" @click="pushValue(item.content)">{{ item.content }}
-            </div>
-          </div>
-        </div>
-        <div class="box3">
-          <div class="info">热点</div>
-          <div class="hots">
-            <div class="hTopic" v-for="item in hotList" @click="pushValue(item.content)">{{ item.content }}</div>
-          </div>
-        </div>
-      </div>
+             @keyup.enter="push()" autocomplete="off"/>
+      <SearchTab ref="searchTab"></SearchTab>
     </div>
 
     <div class="right">
@@ -122,26 +102,14 @@
 <script setup lang="ts">
 import {ref, computed, reactive, onBeforeMount} from "vue";
 import {getInfo, login} from "@/apis/user";
-import {useUserStore} from "@/store/status"
-import ChatBox from "./ChatBox/Index.vue"
+import {useUserStore} from "@/store/status";
+import SearchTab from "./SearchTab/index.vue";
+import ChatBox from "./ChatBox/Index.vue";
 import router from "@/router/index";
 import {ElMessage} from "element-plus";
 const user:any = ref({})
 const chatBox:any = ref()
-
-// input
-const recommendList: any[] = reactive([])
-const hotList: any[] = reactive([])
-const historyList: any[] = reactive([])
-const setHistory = (data: any[]) => {
-  historyList.push(...data);
-}
-const setHots = (data: any[]) => {
-  hotList.push(...data);
-}
-const setRecommends = (data: any[]) => {
-  recommendList.push(...data);
-}
+const searchTab = ref()
 
 // search
 const mainInput = ref()
@@ -153,13 +121,7 @@ function addToInput(text: string) {
 function push() {
   let searchText = mainInput.value;
   let path = `/search/${searchText}`;
-  historyList.push({"text": mainInput.value});
-  router.push({path: path})
-}
-
-function pushValue(input: string) {
-  let path = `/search/${input}`;
-  historyList.push({"text": input});
+  searchTab.value.addHistory(searchText)
   router.push({path: path})
 }
 
@@ -231,39 +193,6 @@ onBeforeMount(() => {
   ])
   setChat([
     {}, {}, {}, {}, {}, {}, {}, {}
-  ])
-  setHistory([
-    {
-      "text": "wtf"
-    },
-    {
-      "text": "你好"
-    },
-    {
-      "text": "嘻嘻了这下"
-    },
-  ])
-  setRecommends([
-    {
-      "content": "wtf"
-    },
-    {
-      "content": "你好"
-    },
-    {
-      "content": "嘻嘻了这下"
-    },
-  ])
-  setHots([
-    {
-      "content": "wtf"
-    },
-    {
-      "content": "你好"
-    },
-    {
-      "content": "嘻嘻了这下"
-    },
   ])
   setPrice([
     {
@@ -440,86 +369,6 @@ $red-selected: rgb(249, 31, 67);
   box-shadow: 0 0 20px 0 black;
 }
 
-.box1 {
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.hTopic {
-  border-radius: 5px;
-  color: white;
-  height: 30px;
-  font-size: 13px;
-  line-height: 30px;
-  padding: 0 5px 0 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-.hTopic:hover {
-  background-color: rgb(51, 52, 63);
-  cursor: pointer;
-}
-
-.testLine2 {
-  border-radius: 5px;
-  height: 30px;
-  font-size: 13px;
-  line-height: 30px;
-  padding: 0 5px 0 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-.testLine2:hover {
-  background-color: rgb(51, 52, 63);
-  cursor: pointer;
-}
-
-
-.testLine {
-  background-color: rgb(51, 52, 63);
-  border-radius: 5px;
-  color: white;
-  height: 25px;
-  font-size: 10px;
-  line-height: 25px;
-  padding: 0 5px 0 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-.histories {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.testLine:hover {
-  cursor: pointer;
-  background-color: rgb(93, 95, 103);
-}
-
-.recommends {
-  width: 100%;
-  display: grid;
-  color: white;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-
-.hots {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.search:hover .searchBlock,
-.main-input:focus + .searchBlock {
-  display: flex;
-}
-
 .fake:hover .msg {
   display: flex;
   top: 63px;
@@ -536,20 +385,6 @@ $red-selected: rgb(249, 31, 67);
   overflow-y: visible;
   z-index: 115;
   position: relative;
-}
-
-.searchBlock {
-  box-sizing: border-box;
-  padding: 15px;
-  margin-top: 5px;
-  width: 100%;
-  border-radius: 10px;
-  position: absolute;
-  z-index: 118;
-  display: none;
-  /* display: flex; */
-  flex-direction: column;
-  background-color: rgb(37, 38, 50);
 }
 
 .msg {
